@@ -1,95 +1,172 @@
 using UnityEngine;
 using data.structs;
 using System.Collections.Generic;
+using DG.Tweening;
 
-public class PlayerHit : MonoBehaviour
+namespace Player.script
 {
-    [SerializeField] List<GameObject> projectiles;
-    [SerializeField] LayerMask enemyLayer;
-    float attackTimer;
-    bool canShoot = false;
-    Weapon weapon;
-    [SerializeField] GameObject projectile;
-    PlayerStat playerStat;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class PlayerHit : MonoBehaviour
     {
-        weapon = new Weapon("Bow", 5, 3, 10, 4, Weapons.Bow);
-        playerStat = gameObject.GetComponent<PlayerStat>();
+        [SerializeField] List<GameObject> projectiles;
+        [SerializeField] LayerMask enemyLayer;
+        float attackTimer;
+        bool canShoot = false;
+        private Weapon weapon;
+        [SerializeField] GameObject projectile;
+        PlayerStat playerStat;
 
+        public static PlayerHit Instance;
 
-
-    }
-    void SetIsCanShot(bool stateMove)
-    {
-        if (stateMove)
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
         {
-            canShoot = false;
+            // weapon = new Weapon("Bow", 5, 3, 10, 4, Weapons.Bow);
+            playerStat = gameObject.GetComponent<PlayerStat>();
         }
-        else canShoot = true;
-    }
 
-
-    // suscribe event 
-    void OnEnable()
-    {
-        GameEvents.OnPlayerMove += SetIsCanShot;
-    }
-    void OnDisable()
-    {
-
-    }
-
-
-
-
-    void Update()
-    {
-        attackTimer += Time.deltaTime;
-
-        Transform target = FindClosestEnemy();
-
-        if (target == null)
+        void Awake()
         {
-            Debug.Log("Tidak ada enemy dalam range");
+            Instance = this;
+            // weapon = ModelsData.weaponsModel1.Find((val) => val.ID == 1);
         }
-       
-        if (target != null && attackTimer >= playerStat.playerStatus.attackSpeed)
+
+        public void SetWeapon(Weapon newWeapon) => weapon = newWeapon;
+        void ChangeWeapon()
         {
-            Shoot(target);
-            attackTimer = 0f;
-        }
-    }
-
-    Transform FindClosestEnemy()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, weapon.range, enemyLayer);
-
-        Transform closest = null;
-        float minDistance = Mathf.Infinity;
-
-        foreach (var hit in hits)
-        {
-            float dist = Vector3.Distance(transform.position, hit.transform.position);
-            if (dist < minDistance)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                minDistance = dist;
-                closest = hit.transform;
+                Weapon lastWeapon = weapon;
+                if (lastWeapon.ID >= ModelsData.weaponsModel1.Count)
+                {
+                    weapon = ModelsData.weaponsModel1.Find((val) => val.ID == 1);
+                }
+                else
+                {
+                    weapon = ModelsData.weaponsModel1.Find((val) => val.ID == lastWeapon.ID + 1);
+                }
             }
         }
 
-        return closest;
+        public Weapon GetCurrentWeapon() => weapon;
+        void SetIsCanShot(bool stateMove)
+        {
+            if (stateMove)
+            {
+                canShoot = false;
+            }
+            else canShoot = true;
+        }
+
+        // suscribe event 
+        void OnEnable()
+        {
+            GameEvents.OnPlayerMove += SetIsCanShot;
+        }
+        void OnDisable()
+        {
+            GameEvents.OnPlayerMove -= SetIsCanShot;
+        }
+
+        void Update()
+        {
+            Attack();
+            ChangeWeapon();
+        }
+
+        void Attack()
+        {
+            attackTimer += Time.deltaTime;
+
+            Transform target = FindClosestEnemy();
+
+            if (target == null)
+            {
+                // Debug.Log("Tidak ada enemy dalam range");
+            }
+
+            if (target != null && attackTimer >= CalculateAttackSpeed())
+            {
+                Shoot(target);
+                attackTimer = 0f;
+            }
+        }
+
+        // calculate attack speed character base + weapon attack speed
+        float CalculateAttackSpeed()
+        {
+            float maxAttackSpeed = 0.3f;
+
+            // jika nilainya positif maka (makin lambat)
+            // jika nilainya negatif maka (makin cepat)
+            float impactAttackSpeed = weapon.attackSpeedImpact;
+
+            float result = playerStat.playerStatus.attackSpeed + impactAttackSpeed;
+
+            if (result < maxAttackSpeed) return maxAttackSpeed;
+            return result;
+        }
+
+        // calculate Damage
+        float CalculateDamage()
+        {
+            float result = playerStat.playerStatus.attackPoint + weapon.damage;
+            return result;
+        }
+
+        // calculate movement speed 
+       public  float GetMovementImpact()
+        {
+            float result = weapon.movementImpact / 2;
+            return result;
+        }
+
+        // calculate range (stat, level)
+        float CalculateRange()
+        {
+            float result = playerStat.playerStatus.attackPoint + weapon.range;
+            return result;
+        }
+
+        Transform FindClosestEnemy()
+        {
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, CalculateRange(), enemyLayer);
+
+            Transform closest = null;
+            float minDistance = Mathf.Infinity;
+
+            foreach (var hit in hits)
+            {
+                float dist = Vector3.Distance(transform.position, hit.transform.position);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    closest = hit.transform;
+                }
+            }
+
+            return closest;
+        }
+
+        void Shoot(Transform target)
+        {
+            if (!canShoot) return;
+
+            GameObject arrow = Instantiate(projectiles[weapon.ID - 1], transform.position, Quaternion.identity);
+            Vector3 direction = (target.position - transform.position).normalized;
+            ArrowSystem projectile = arrow.GetComponent<ArrowSystem>();
+            
+            Camera.main.DOShakePosition(0.08f, 0.1f + ((weapon.damage / 50) * 0.3f));
+            projectile.Init(direction, weapon.lifetime, CalculateDamage(), weapon.speed, weapon.knockbackStrength);
+        }
+
+        void OnDrawGizmos()
+        {
+            if(Instance == null) return;
+            
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, CalculateRange());
+        }
     }
 
-    void Shoot(Transform target)
-    {
-        if(!canShoot) return;
-        
-        GameObject arrow = Instantiate(projectiles[((int)weapon.attachmentWeapon)], transform.position, Quaternion.identity);
-        Vector3 direction = (target.position - transform.position).normalized;
-        ArrowSystem projectile = arrow.GetComponent<ArrowSystem>();
-        projectile.Init(direction, weapon.damage, weapon.lifetime, weapon.damage);
-    }
-
+    
 }

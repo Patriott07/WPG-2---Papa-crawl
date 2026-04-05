@@ -6,8 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototype.unity
+    path: Assets/Scenes/Experiment/Prototype.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/UI/LoadingUI.unity
+    guid: c79f25073175242409776af870f1574f
+  - enabled: 1
+    path: Assets/Scenes/Game/map1.unity
+    guid: c003497f3e412d146a0b05d000d2b1a5
+  - enabled: 1
+    path: Assets/Scenes/Game/map2.unity
+    guid: 8d457728dbd859542875885fb0fe2b0f
+  - enabled: 1
+    path: Assets/Scenes/Game/map3.unity
+    guid: 16383ffa5dd6c1f4595e7dbc222faa73
+  - enabled: 1
+    path: Assets/Scenes/Game/map4.unity
+    guid: e87adc923de882a44bd20e56165883c8
+  - enabled: 1
+    path: Assets/Scenes/Game/map5.unity
+    guid: b78923d9d5ea31a4a87b175ef1886861
+  - enabled: 1
+    path: Assets/Scenes/Game/map6.unity
+    guid: 6266913e48fa97f49bccf004d175fe04
+  - enabled: 1
+    path: Assets/Scenes/Game/map7.unity
+    guid: 369dd435876a68c41956411e44a49d5a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

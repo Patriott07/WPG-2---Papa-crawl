@@ -1,0 +1,931 @@
+fileFormatVersion: 2
+guid: 493562faf78d2d14b909ee0c3c6bbc53
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2204830025229982221
+    second: food01_0
+  - first:
+      213: -7755912937753405184
+    second: food01_1
+  - first:
+      213: -4193760121808073163
+    second: food01_2
+  - first:
+      213: 6988985711472031051
+    second: food01_3
+  - first:
+      213: -6712694823255316377
+    second: food01_4
+  - first:
+      213: -1968935482282467208
+    second: food01_5
+  - first:
+      213: 1438886089075850438
+    second: food01_6
+  - first:
+      213: 1770749393889633303
+    second: food01_7
+  - first:
+      213: 7247774070965861624
+    second: food01_8
+  - first:
+      213: -8337549601952672894
+    second: food01_9
+  - first:
+      213: -9188895055919195816
+    second: food01_10
+  - first:
+      213: 1678227587283605951
+    second: food01_11
+  - first:
+      213: -995933320634582721
+    second: food01_12
+  - first:
+      213: 8307533582243529293
+    second: food01_13
+  - first:
+      213: -6461239190578769884
+    second: food01_14
+  - first:
+      213: 4953744947977235558
+    second: food01_15
+  - first:
+      213: 1786978846354344984
+    second: food01_16
+  - first:
+      213: 7718413494078612352
+    second: food01_17
+  - first:
+      213: -6194139932912266253
+    second: food01_18
+  - first:
+      213: 6166309319937529339
+    second: food01_19
+  - first:
+      213: -529294526831377758
+    second: food01_20
+  - first:
+      213: -8609588048528407287
+    second: food01_21
+  - first:
+      213: 3323547178086568873
+    second: food01_22
+  - first:
+      213: -5251919652668979536
+    second: food01_23
+  - first:
+      213: 7562520422983984911
+    second: food01_24
+  - first:
+      213: -5787678391973640652
+    second: food01_25
+  - first:
+      213: 6515003416746621302
+    second: food01_26
+  - first:
+      213: -4271831126851970243
+    second: food01_27
+  - first:
+      213: -7786740890748025741
+    second: food01_28
+  - first:
+      213: -6721605366691740096
+    second: food01_29
+  - first:
+      213: 7635860490352277835
+    second: food01_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: food01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f52d0416ced661e0800000000000000
+      internalID: -2204830025229982221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0091a5496467d5490800000000000000
+      internalID: -7755912937753405184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e4e628365ccc5c0800000000000000
+      internalID: -4193760121808073163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b453290b97dddf060800000000000000
+      internalID: 6988985711472031051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7686346af97b7d2a0800000000000000
+      internalID: -6712694823255316377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87024e85c9feca4e0800000000000000
+      internalID: -1968935482282467208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ccfd934643f7f310800000000000000
+      internalID: 1438886089075850438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 895
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 714a7012137f29810800000000000000
+      internalID: 1770749393889633303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fcf4300e14459460800000000000000
+      internalID: 7247774070965861624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 283596eafc21b4c80800000000000000
+      internalID: -8337549601952672894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 859d799a1ac7a7080800000000000000
+      internalID: -9188895055919195816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb9dc4859134a4710800000000000000
+      internalID: 1678227587283605951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_12
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39b99bebebbd22f0800000000000000
+      internalID: -995933320634582721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_13
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d42014127c94a4370800000000000000
+      internalID: 8307533582243529293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42058b470311556a0800000000000000
+      internalID: -6461239190578769884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_15
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 766
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66ca11cb8cc3fb440800000000000000
+      internalID: 4953744947977235558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81c861efacf9cc810800000000000000
+      internalID: 1786978846354344984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0832320dd205d1b60800000000000000
+      internalID: 7718413494078612352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f3d3b98c8ef90aa0800000000000000
+      internalID: -6194139932912266253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf59e0ee7a1239550800000000000000
+      internalID: 6166309319937529339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_20
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a248a2ae6197a8f0800000000000000
+      internalID: -529294526831377758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_21
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90504011949948880800000000000000
+      internalID: -8609588048528407287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_22
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a31a10bc8c9f1e20800000000000000
+      internalID: 3323547178086568873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_23
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 637
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b6c5c9d6ee6d17b0800000000000000
+      internalID: -5251919652668979536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 508
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07e89ab14873f860800000000000000
+      internalID: 7562520422983984911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_25
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 508
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 436053cba290eafa0800000000000000
+      internalID: -5787678391973640652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 508
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67973ade611f96a50800000000000000
+      internalID: 6515003416746621302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_27
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 508
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b1887293867b4c0800000000000000
+      internalID: -4271831126851970243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food01_28
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 508
+        width: 128
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37484f07a60ffe390800000000000000
+      internalID: -7786740890748025741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7806e10dfdacb5a438abc713ab170e4c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":129.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      food01_0: -2204830025229982221
+      food01_1: -7755912937753405184
+      food01_10: -9188895055919195816
+      food01_11: 1678227587283605951
+      food01_12: -995933320634582721
+      food01_13: 8307533582243529293
+      food01_14: -6461239190578769884
+      food01_15: 4953744947977235558
+      food01_16: 1786978846354344984
+      food01_17: 7718413494078612352
+      food01_18: -6194139932912266253
+      food01_19: 6166309319937529339
+      food01_2: -4193760121808073163
+      food01_20: -529294526831377758
+      food01_21: -8609588048528407287
+      food01_22: 3323547178086568873
+      food01_23: -5251919652668979536
+      food01_24: 7562520422983984911
+      food01_25: -5787678391973640652
+      food01_26: 6515003416746621302
+      food01_27: -4271831126851970243
+      food01_28: -7786740890748025741
+      food01_3: 6988985711472031051
+      food01_4: -6712694823255316377
+      food01_5: -1968935482282467208
+      food01_6: 1438886089075850438
+      food01_7: 1770749393889633303
+      food01_8: 7247774070965861624
+      food01_9: -8337549601952672894
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

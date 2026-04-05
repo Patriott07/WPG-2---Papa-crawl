@@ -1,17 +1,30 @@
 
 using UnityEngine;
 using data.structs;
+using Player.script;
+
+public struct MovementPlayer
+{
+    // public float moveSpeed;
+    public float bonusSpeed;
+    public bool canMove;
+
+}
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Setting")]
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] bool canMove = true;
+
+    [SerializeField] MovementPlayer movementPlayer;
+    // [SerializeField] float moveSpeed = 5f;
+    // [SerializeField] bool canMove = true;
     Rigidbody2D rb;
     Vector2 velocity;
+    // float bonusSpeed;
 
     public static PlayerMovement Instance;
     PlayerStat pStat;
+    PlayerHit playerHit;
     CameraFollowPlayer cameraFollowSc;
 
     void Awake()
@@ -20,17 +33,19 @@ public class PlayerMovement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         pStat = gameObject.GetComponent<PlayerStat>();
 
+        movementPlayer.canMove = true;
+        movementPlayer.bonusSpeed = 1f;
     }
 
     void Start()
     {
+        playerHit = gameObject.GetComponent<PlayerHit>();
         cameraFollowSc = FindAnyObjectByType<CameraFollowPlayer>();
-        // moveSpeed = ;
     }
 
     void Movement()
     {
-        if (!canMove) return;
+        if (!movementPlayer.canMove) return;
 
         if (Input.GetKey(KeyCode.W)) velocity.y = 1;
         else if (Input.GetKey(KeyCode.S)) velocity.y = -1;
@@ -44,9 +59,7 @@ public class PlayerMovement : MonoBehaviour
         else GameEvents.OnPlayerMove?.Invoke(true);
 
         velocity = velocity.normalized; // biar diagonal gak lebih cepat
-        rb.linearVelocity = velocity * pStat.playerStatus.movespeed;
-
-
+        rb.linearVelocity = velocity * CalculateMovementSpeed() * movementPlayer.bonusSpeed;
     }
 
     public Vector2 StoreLocationPlayer()
@@ -55,14 +68,29 @@ public class PlayerMovement : MonoBehaviour
         return loc;
     }
 
+    float CalculateMovementSpeed()
+    {
+        float result = playerHit.GetMovementImpact() + pStat.playerStatus.movespeed;
+        return result;
+    }
+
+
+    void Running()
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) movementPlayer.bonusSpeed = 1.5f;
+        else movementPlayer.bonusSpeed = 1;
+    }
+
     void FixedUpdate()
     {
         Movement();
-
     }
 
     void Update()
     {
-        cameraFollowSc.TransitionCamSize(rb);
+        Running();
+        cameraFollowSc.TransitionCamSize(rb, movementPlayer.bonusSpeed == 1.5f);
     }
+
+
 }

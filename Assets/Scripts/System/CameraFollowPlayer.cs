@@ -1,17 +1,22 @@
 using Unity.VisualScripting;
 using UnityEngine;
-
+using Player.script;
 public class CameraFollowPlayer : MonoBehaviour
 {
     public Transform player;          // Target player
     public Vector3 offset;            // Jarak kamera dari player
     public float smoothSpeed = 5f;    // Kecepatan follow (semakin besar semakin cepat)
-    public float cameraSizeWhileNotMove = 6.5f, cameraSizeWhileMove = 5.5f, zoomSpeed =5f;
+    public float cameraSizeWhileNotMove = 6.5f, cameraSizeWhileMove = 5.5f, cameraSizeWhileRun = 4.5f, zoomSpeed =5f;
     Camera cam;
 
     void Awake()
     {
         cam = gameObject.GetComponent<Camera>();
+    }
+
+    void Start()
+    {
+        player = PlayerHit.Instance.transform;
     }
 
     void LateUpdate()
@@ -26,14 +31,15 @@ public class CameraFollowPlayer : MonoBehaviour
         // transform.LookAt(player);
     }
 
-    public void TransitionCamSize(Rigidbody2D rb)
+    public void TransitionCamSize(Rigidbody2D rb, bool isRun)
     {
         float targetZoom;
 
         // Cek apakah player bergerak
         if (rb.linearVelocity.magnitude > 0.1f)
         {
-            targetZoom = cameraSizeWhileMove;
+            if(isRun) targetZoom = cameraSizeWhileRun;
+            else targetZoom = cameraSizeWhileMove;
         }
         else
         {

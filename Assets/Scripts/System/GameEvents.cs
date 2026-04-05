@@ -1,20 +1,38 @@
 using UnityEngine;
 using System;
+using data.structs;
 public class GameEvents : MonoBehaviour
 {
+    // =====================================
+    // Player
     public static Action<bool> OnPlayerMove;
-    public static GameEvents Instance;
+    public static Action<float> OnPlayerGetDamage;
+    // =====================================
 
-    void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    // =====================================
+    // System
+    public static Action<bool> OnStart;
+    public static Action<float> LevelStart;
+    public static Action<GameState> SaveManagerLoaded;
+    public static Action<int, int> CalculateEnemyStatByMapLevel;
+    public static Action<Transform> GetCollideWithPlayer;
+    public static Action<string> StartRotatingDagger;
+    // =====================================
+
+
+    // =====================================
+    // UI
+    
+    // =====================================
+
+
+
+    // =====================================
+    // Enemy
+    public static Action<string, float, float, Vector2> OnEnemyGetKnockBack;
+    public static Action<string, float> OnEnemyGetDamage;
+
+    // =====================================
+
+
 }
