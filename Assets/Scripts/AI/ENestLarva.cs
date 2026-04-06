@@ -9,11 +9,11 @@ public class ENestLarva : MonoBehaviour
     [SerializeField] GameObject Larva;
     [SerializeField] int minSpawn, maxSpawn;
     [SerializeField] float radiusSpawn = 2f;
-
     Transform target;
     bool isCanChasing, canAttack = false, isAlive = true;
     float delayHit = 1f;
     int level;
+    public int spawnCount;
 
     // ==========================
     // COMPONENT HELPER
@@ -23,6 +23,7 @@ public class ENestLarva : MonoBehaviour
     {
         aIPath = gameObject.GetComponent<AIPath>();
         Init();
+        spawnCount = Random.Range(minSpawn, maxSpawn);
     }
     void Start()
     {
@@ -133,7 +134,7 @@ public class ENestLarva : MonoBehaviour
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, ((baseInit.hp / 4) + (level * 14)) / 4);
         CheckRange(); // damage radius
-        for (int i = 0; i < Random.Range(minSpawn, maxSpawn); i++)
+        for (int i = 0; i < spawnCount; i++)
         {
             SpawnOnRadius();
         }

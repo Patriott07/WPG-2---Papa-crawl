@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ExpParticle : MonoBehaviour
@@ -10,7 +11,7 @@ public class ExpParticle : MonoBehaviour
 
     private Vector3 startPos;
     private Vector3 targetPos;
-    private bool hasTarget;
+    private bool hasTarget, isHasInteract;
 
     public void Init(Vector3 origin)
     {
@@ -81,12 +82,31 @@ public class ExpParticle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (isCanCollide)
+            if (isCanCollide && !isHasInteract)
             {
+                isHasInteract = true;
                 Debug.Log($"Player Gain Exp {expAffect}");
                 PlayerStat.Instance.GainExp(expAffect);
-                gameObject.SetActive(false);
+                gameObject.GetComponent<SoundForItem>().PlaySound(false);
+                // gameObject.SetActive(false);
+                StartCoroutine(SetActiveFalseWithDelay(0.6f));
             }
         }
+    }
+
+    IEnumerator SetActiveFalseWithDelay(float d)
+    {
+        // set function and view turn off
+        SpriteRenderer sp = gameObject.GetComponent<SpriteRenderer>();
+        BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
+        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0);
+        collider.enabled = false;
+
+        yield return new WaitForSeconds(d);
+
+        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
+        collider.enabled = true;
+
+        gameObject.SetActive(false);
     }
 }

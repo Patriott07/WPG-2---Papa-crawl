@@ -33,6 +33,10 @@ public class PlayerStat : MonoBehaviour
             level++;
             expRequiredForLevelUp = 150 * (level + 1) * 1.5f; // Requirement exp for next level up
 
+            // play sound
+            StartCoroutine(PlayerSounds.Instance.PlayDelayBeforeSound(0.1f, PlayerSounds.Instance.levelup));
+            ShowLevelUpText();
+            
             playerStatus.maxHP = baseInit.maxHP + (level * 20);
             playerStatus.hp += playerStatus.maxHP - lastMaxHp;
             playerStatus.attackPoint = baseInit.attackPoint + (level * 3);
@@ -41,6 +45,8 @@ public class PlayerStat : MonoBehaviour
             Debug.Log("Player Level Up");
         }
     }
+
+    
 
     public void GainExp(float v)
     {
@@ -78,6 +84,22 @@ public class PlayerStat : MonoBehaviour
 
         if (playerStatus.hp <= 0) Dead();
     }
+    
+    void ShowLevelUpText()
+    {
+          GameObject text = ObjectPollingGame.Instance.GetUITextFloat();
+        // set color, text, pos
+        text.transform.position = new Vector2(transform.position.x + Random.Range(-0.4f, 0.4f), transform.position.y + 0.6f);
+        TextUIFloatingDamage scriptText = text.GetComponent<TextUIFloatingDamage>();
+        scriptText.colorText = Color.yellow;
+        scriptText.textInput = "LEVEL UPP++";
+       
+        scriptText.textTMP.rectTransform.sizeDelta = new Vector2(200, 65);
+        scriptText.textTMP.fontStyle = TMPro.FontStyles.Bold;
+        scriptText.dDestroy = 2f;
+        text.SetActive(true);
+
+    }
 
     void ShowNumberText(float damage)
     {
@@ -87,10 +109,11 @@ public class PlayerStat : MonoBehaviour
         TextUIFloatingDamage scriptText = text.GetComponent<TextUIFloatingDamage>();
         scriptText.colorText = Color.red;
         scriptText.textInput = damage.ToString();
-        text.SetActive(true);
 
         scriptText.textTMP.rectTransform.sizeDelta = new Vector2(200, 65);
         scriptText.textTMP.fontStyle = TMPro.FontStyles.Bold;
+
+        text.SetActive(true);
     }
 
     IEnumerator DelayBeforeCanGetHitAgain()

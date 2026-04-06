@@ -29,6 +29,17 @@ public class MapIdentity : MonoBehaviour
         GameEvents.CalculateEnemyStatByMapLevel?.Invoke(minEnemyLevel, maxEnemyLevel);
         GameObject[] enemiesArray = GameObject.FindGameObjectsWithTag("Enemy");
         countEnemy = enemiesArray.Length;
+
+        // Check every enemy if thats nest
+        foreach (GameObject en in enemiesArray)
+        {
+            ENestLarva eNestLarva = en.GetComponent<ENestLarva>();
+            if (eNestLarva)
+            {
+                countEnemy += eNestLarva.spawnCount;
+            }
+        }
+        
         playerT = PlayerStat.Instance.transform;
     }
 
@@ -119,7 +130,8 @@ public class MapIdentity : MonoBehaviour
         gameState1.level = 3;
         gameState1.currentScene = "map1";
         gameState1.InventoryPlayer = new InventorySlot[30];
-        gameState1.weapon = new Weapon();
+        // gameState1.weapon = new Weapon();
+        gameState1.weapon = new Weapon(1,"Slingshot", 25, 34, 5, 5f,2, 6, -4.8f, 10);
         gameState1.player = new PlayerStatus(30, 5, 6f, 5, 30);
         gameState1.currentExp = 0;
 

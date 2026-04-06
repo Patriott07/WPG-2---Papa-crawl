@@ -114,7 +114,7 @@ namespace Player.script
         }
 
         // calculate movement speed 
-       public  float GetMovementImpact()
+        public float GetMovementImpact()
         {
             float result = weapon.movementImpact / 2;
             return result;
@@ -154,19 +154,51 @@ namespace Player.script
             GameObject arrow = Instantiate(projectiles[weapon.ID - 1], transform.position, Quaternion.identity);
             Vector3 direction = (target.position - transform.position).normalized;
             ArrowSystem projectile = arrow.GetComponent<ArrowSystem>();
-            
+
             Camera.main.DOShakePosition(0.08f, 0.1f + ((weapon.damage / 50) * 0.3f));
             projectile.Init(direction, weapon.lifetime, CalculateDamage(), weapon.speed, weapon.knockbackStrength);
+
+            PlaySound();
+        }
+
+        void PlaySound()
+        {
+            switch (weapon.ID)
+            {
+                case 1:
+                    PlayerSounds.Instance.slingshot.Stop();
+                    PlayerSounds.Instance.slingshot.pitch = Random.Range(0.95f, 1.05f);
+                    PlayerSounds.Instance.slingshot.Play();
+                    break;
+                case 2:
+                    PlayerSounds.Instance.bow.Stop();
+                    PlayerSounds.Instance.bow.pitch = Random.Range(0.95f, 1.05f);
+                    PlayerSounds.Instance.bow.Play();
+                    break;
+                case 3:
+                    PlayerSounds.Instance.dagger.Stop();
+                    PlayerSounds.Instance.dagger.pitch = Random.Range(0.95f, 1.05f);
+                    PlayerSounds.Instance.dagger.Play();
+                    break;
+                case 4:
+                    PlayerSounds.Instance.bow.Stop();
+                    PlayerSounds.Instance.bow.pitch = Random.Range(0.95f, 1.05f);
+                    PlayerSounds.Instance.bow.Play();
+                    break;
+
+            }
         }
 
         void OnDrawGizmos()
         {
-            if(Instance == null) return;
-            
+            if (Instance == null) return;
+
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, CalculateRange());
         }
     }
 
-    
+
+
+
 }

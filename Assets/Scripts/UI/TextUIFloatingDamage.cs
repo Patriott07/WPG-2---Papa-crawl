@@ -7,6 +7,7 @@ public class TextUIFloatingDamage : MonoBehaviour
     public Color colorText;
     public string textInput;
     public Animator animator;
+    public float dDestroy = 0.2f;
     
 
     void Start()
@@ -25,7 +26,8 @@ public class TextUIFloatingDamage : MonoBehaviour
 
     IEnumerator DestroyInSec()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(dDestroy);
+        dDestroy = 0.2f;
         gameObject.SetActive(false);
     }
 
