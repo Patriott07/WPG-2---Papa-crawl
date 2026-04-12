@@ -11,6 +11,7 @@ TagManager:
   - bullet
   - Water
   - ProjectileEnemy
+  - BlackSmith
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - UI
   - Enemy
   - Obs
-  - 
+  - Interactable
   - 
   - 
   - 
@@ -48,9 +49,6 @@ TagManager:
   - name: ground
     uniqueID: 2265395669
     locked: 0
-  - name: UI
-    uniqueID: 1130193609
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -59,6 +57,9 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 46946305
+    locked: 0
+  - name: UI
+    uniqueID: 1130193609
     locked: 0
   m_RenderingLayers:
   - Default

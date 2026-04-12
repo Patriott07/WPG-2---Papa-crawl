@@ -30,6 +30,16 @@ public class ENestLarva : MonoBehaviour
         target = PlayerHit.Instance.transform;
     }
 
+     void TurnOffEnemy()
+    {
+        isCanChasing = false;
+        target = null;
+        canAttack = false;
+        aIPath.maxSpeed = 0;
+        aIPath.enabled = false;
+        // SetMovePathF(false);
+    }
+
     void CalculatedStatEnemy(int minL, int maxL)
     {
         level = Random.Range(minL, maxL);
@@ -43,12 +53,14 @@ public class ENestLarva : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
+         GameEvents.OnPlayerDead += TurnOffEnemy;
         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
+         GameEvents.OnPlayerDead -= TurnOffEnemy;
         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
     }
 

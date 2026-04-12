@@ -27,7 +27,7 @@ public class ExpParticle : MonoBehaviour
         hasTarget = true;
     }
 
-    void StartCollide(Transform t)
+    public void StartCollide(Transform t)
     {
         isCanCollide = true;
         target = t;

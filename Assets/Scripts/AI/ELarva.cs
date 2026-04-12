@@ -6,7 +6,7 @@ using Player.script;
 public class ELarva : MonoBehaviour
 {
     [SerializeField] EnemyStatus statEnemy, baseInit;
-    bool isCanChasing, canAttack, isAlive = true;
+    public bool isCanChasing, canAttack, isAlive = true;
     float delayHit = 1f;
 
     int level;
@@ -25,9 +25,22 @@ public class ELarva : MonoBehaviour
     {
         StartCoroutine(StopAndChasing());
         target = PlayerHit.Instance.transform;
+        canAttack = true;
     }
 
-     void CalculatedStatEnemy(int minL, int maxL)
+
+
+    void TurnOffEnemy()
+    {
+        aIPath.maxSpeed = 0;
+        aIPath.enabled = false;
+        target = null;
+        isCanChasing = false;
+        canAttack = false;
+        SetMovePathF(false);
+    }
+
+    void CalculatedStatEnemy(int minL, int maxL)
     {
         level = Random.Range(minL, maxL);
         statEnemy.hp = baseInit.hp + (level * 14);
@@ -40,6 +53,7 @@ public class ELarva : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
@@ -47,6 +61,7 @@ public class ELarva : MonoBehaviour
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
     }
 
     void GetDamage(string instanceID, float d)
@@ -63,7 +78,7 @@ public class ELarva : MonoBehaviour
 
     void Dead()
     {
-        if(!isAlive) return;
+        if (!isAlive) return;
 
         isAlive = false;
         SetMovePathF(false);
@@ -77,7 +92,6 @@ public class ELarva : MonoBehaviour
     {
         CheckRange();
     }
-
 
     void Init()
     {
@@ -126,8 +140,11 @@ public class ELarva : MonoBehaviour
 
     void CheckRange()
     {
-        if (Vector2.Distance(transform.position, target.position) <= statEnemy.rangeAttack)
-            Attack();
+        if (target != null)
+        {
+            if (Vector2.Distance(transform.position, target.position) <= statEnemy.rangeAttack)
+                Attack();
+        }
     }
 
     void Attack()

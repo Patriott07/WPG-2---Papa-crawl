@@ -79,9 +79,4 @@ public class ItemSystemByType : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

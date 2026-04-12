@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 velocity;
     // float bonusSpeed;
+    public SpriteRenderer sp, spWeapon, spArmor;
 
     public static PlayerMovement Instance;
     PlayerStat pStat;
@@ -32,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
         rb = gameObject.GetComponent<Rigidbody2D>();
         pStat = gameObject.GetComponent<PlayerStat>();
-
         movementPlayer.canMove = true;
         movementPlayer.bonusSpeed = 1f;
     }
@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
         cameraFollowSc = FindAnyObjectByType<CameraFollowPlayer>();
     }
 
+    public void SetCanMove(bool state) => movementPlayer.canMove = state; 
+
     void Movement()
     {
         if (!movementPlayer.canMove) return;
@@ -51,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.S)) velocity.y = -1;
         else velocity.y = 0;
 
-        if (Input.GetKey(KeyCode.A)) velocity.x = -1;
-        else if (Input.GetKey(KeyCode.D)) velocity.x = 1;
+        if (Input.GetKey(KeyCode.A)) {velocity.x = -1; FLipAllSprite(false);}
+        else if (Input.GetKey(KeyCode.D)) {velocity.x = 1; FLipAllSprite(true);}
         else velocity.x = 0;
 
         if (velocity.x == 0 && velocity.y == 0) GameEvents.OnPlayerMove?.Invoke(false);
@@ -60,6 +62,13 @@ public class PlayerMovement : MonoBehaviour
 
         velocity = velocity.normalized; // biar diagonal gak lebih cepat
         rb.linearVelocity = velocity * CalculateMovementSpeed() * movementPlayer.bonusSpeed;
+    }
+
+    void FLipAllSprite(bool state)
+    {
+        sp.flipX = state;
+        // spWeapon.flipX = state;
+        spArmor.flipX = state;
     }
 
     public Vector2 StoreLocationPlayer()
@@ -89,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Running();
-        cameraFollowSc.TransitionCamSize(rb, movementPlayer.bonusSpeed == 1.5f);
+        // cameraFollowSc.TransitionCamSize(rb, movementPlayer.bonusSpeed == 1.5f);
     }
 
 

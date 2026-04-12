@@ -3,12 +3,14 @@ using data.structs;
 using System.Collections.Generic;
 public class ObjectPollingGame : MonoBehaviour
 {
-     [Header("==== UI FLOATS ====")]
+    [Header("==== UI FLOATS ====")]
     [SerializeField] ObjectPolling TextUIFloats;
-     [Header("==== Exp particle ====")]
+    [Header("==== Exp particle ====")]
     [SerializeField] ObjectPolling particleExps;
     List<GameObject> list_TextUIFloats = new List<GameObject>();
     List<GameObject> list_ParticleExps = new List<GameObject>();
+
+    public GameObject BigDagger;
 
     public static ObjectPollingGame Instance;
 

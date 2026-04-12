@@ -12,7 +12,8 @@ namespace data.structs
         Consumable,   // bisa dipakai (potion, food)
         Material,     // bahan crafting
         Equipment,    // senjata, armor
-        Quest         // item quest
+        Attachment,    // attachment
+        Quest,         // item quest
     }
 
     [System.Serializable]
@@ -20,6 +21,8 @@ namespace data.structs
     {
         public ItemData result;
         public int resultAmount;
+
+        public int levelRequired; // Level minimal untuk craft item ini
 
         public ItemData[] ingredients;
         public int[] amounts;
@@ -73,10 +76,12 @@ namespace data.structs
         public float movementImpact;
         public float attackSpeedImpact;
         public int maxAttachment; // max attachemnt
+
+        public float offsetAngleView;
         // public Weapons attachmentWeapon; // gunanya apa?
 
         public List<AttachmentWeaponType> attachments;
-        public Weapon(int ID, string name, int speed, float damage, float range, float lifetime, int maxAttachment, float movementImpact, float attackSpeedImpact, float knockbackStrength)
+        public Weapon(int ID, string name, int speed, float damage, float range, float lifetime, int maxAttachment, float movementImpact, float attackSpeedImpact, float knockbackStrength,float angleView)
         {
             this.ID = ID;
             this.name = name;
@@ -92,6 +97,7 @@ namespace data.structs
             this.movementImpact = movementImpact;
             this.attackSpeedImpact = attackSpeedImpact;
             this.knockbackStrength = knockbackStrength;
+            this.offsetAngleView = angleView;
         }
     }
 
@@ -153,13 +159,13 @@ namespace data.structs
         public PlayerStatus(float maxHP, float movespeed, float attackspeed, float attackpoint, float maxStamina)
         {
             this.hp = maxHP;
-            this.maxHP = maxHP;
+            this.maxHP = maxHP; // armor
             this.armor = 0;
             this.movespeed = movespeed;
             this.attackSpeed = attackspeed;
             this.attackPoint = attackpoint;
             this.stamina = maxStamina;
-            this.maxStamina = maxStamina;
+            this.maxStamina = maxStamina; // armor
             this.critDamage = 1.5f;
         }
     }
@@ -182,10 +188,11 @@ namespace data.structs
     public class GameState
     {
         public PlayerStatus player;
-        public Weapon weapon;
+        public Weapon? weapon;
         public List<Item> craftedItem;
         public  InventorySlot[] InventoryPlayer; 
         public string currentScene;
+        public string lastSaveScene;
         public int level;
         public float currentExp;
         // i want to add other

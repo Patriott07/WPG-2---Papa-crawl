@@ -61,7 +61,7 @@ public class ETikusBanditMele : MonoBehaviour
         return Vector3.Distance(transform.position, target.position);
     }
 
-     void CalculatedStatEnemy(int minL, int maxL)
+    void CalculatedStatEnemy(int minL, int maxL)
     {
         level = Random.Range(minL, maxL);
         statEnemy.hp = baseInit.hp + (level * 40);
@@ -71,16 +71,28 @@ public class ETikusBanditMele : MonoBehaviour
         Debug.Log($"{gameObject.name} Sudah dihitung berdasarkan level");
     }
 
+    void TurnOffEnemy()
+    {
+        // isCanChasing = false;
+        target = null;
+        isAlive = false;
+        SetMovePathF(false);
+        aiPath.maxSpeed = 0;
+          aiPath.enabled = false;
+    }
+
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
-          GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
-          GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
     }
 
 
@@ -94,8 +106,7 @@ public class ETikusBanditMele : MonoBehaviour
 
         yield return StartCoroutine(PerformDashAttack());
 
-
-        yield return new WaitForSeconds(1f); // cooldown
+        yield return new WaitForSeconds(2f); // cooldown
                                              // back to normal
         aiPath.enabled = true;
         isAttacking = false;
@@ -150,14 +161,14 @@ public class ETikusBanditMele : MonoBehaviour
 
     void Dead()
     {
-        if(!isAlive) return;
+        if (!isAlive) return;
         isAlive = false;
         aiPath.canMove = false;
         GetComponent<SpriteRenderer>().color = Color.blue;
 
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
-        
+
         StopAllCoroutines();
         Destroy(gameObject);
     }
@@ -205,7 +216,7 @@ public class ETikusBanditMele : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && isPerform)
         {
-             // knockback
+            // knockback
             float knockbackStrenth = 80f;
             target.GetComponent<Rigidbody2D>().AddForce(direction * knockbackStrenth, ForceMode2D.Impulse);
 
@@ -219,7 +230,7 @@ public class ETikusBanditMele : MonoBehaviour
             GameEvents.OnPlayerGetDamage?.Invoke(statEnemy.att);
             // yield return new WaitForSeconds()
         }
-       
+
     }
 
     public void SetMovePathF(bool state)

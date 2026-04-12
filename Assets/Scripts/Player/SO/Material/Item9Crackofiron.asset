@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   itemName: Crack of Iron
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32
-  icon: {fileID: -8337549601952672894, guid: 493562faf78d2d14b909ee0c3c6bbc53, type: 3}
+  icon: {fileID: -4479248875807757130, guid: c159bf6299aee5e44a3219d4857a847d, type: 3}

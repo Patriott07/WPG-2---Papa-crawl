@@ -1,5 +1,6 @@
 using UnityEngine;
 using data.structs;
+using Player.script;
 
 
 public class ArrowSystem : MonoBehaviour
@@ -46,8 +47,20 @@ public class ArrowSystem : MonoBehaviour
             scriptText.textInput = this.damage.ToString();
             textUIDamage.SetActive(true);
 
+            CheckSpawnDagger(this.damage);
+
             KnockBackSystem(collision.gameObject.GetInstanceID().ToString());
             Destroy(gameObject);
+        }
+    }
+
+    void CheckSpawnDagger(float dmg)
+    {
+        if(PlayerHit.Instance.GetCurrentWeapon()?.name == "Dagger")
+        {
+            GameObject bigDagger = Instantiate(ObjectPollingGame.Instance.BigDagger, transform.position, Quaternion.identity);
+            bigDagger.GetComponent<KunaiRotationSystem>().damage = dmg * 0.3f;
+            bigDagger.GetComponent<KunaiRotationSystem>().rotationSpeed += PlayerStat.Instance.level * 1.5f;  
         }
     }
 

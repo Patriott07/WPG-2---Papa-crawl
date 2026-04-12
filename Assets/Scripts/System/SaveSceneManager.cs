@@ -8,7 +8,7 @@ public static class SaveSceneManager
 {
     static string savePath => Application.persistentDataPath + "/save.dat";
 
-    static readonly byte[] aesKey = Encoding.UTF8.GetBytes("1234567890123456"); 
+    static readonly byte[] aesKey = Encoding.UTF8.GetBytes("1234567890123456");
     static readonly byte[] hmacKey = Encoding.UTF8.GetBytes("papA_ppawsID_123");
 
 
@@ -26,6 +26,27 @@ public static class SaveSceneManager
         }
 
         Debug.Log("Filee saved succesfully");
+    }
+
+    public static void DeleteSaveFile()
+    {
+        // Cek apakah file ada di path tersebut
+        if (File.Exists(savePath))
+        {
+            try
+            {
+                File.Delete(savePath);
+                Debug.LogWarning($"File berhasil dihapus di: {savePath}");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Gagal menghapus file: {e.Message}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("File tidak ditemukan, tidak ada yang dihapus.");
+        }
     }
 
     public static GameState Load()

@@ -7,6 +7,7 @@ public class GameEvents : MonoBehaviour
     // Player
     public static Action<bool> OnPlayerMove;
     public static Action<float> OnPlayerGetDamage;
+    public static Action OnPlayerDead;
     // =====================================
 
     // =====================================
@@ -16,6 +17,7 @@ public class GameEvents : MonoBehaviour
     public static Action<GameState> SaveManagerLoaded;
     public static Action<int, int> CalculateEnemyStatByMapLevel;
     public static Action<Transform> GetCollideWithPlayer;
+    public static Action MapClear;
     public static Action<string> StartRotatingDagger;
     // =====================================
 

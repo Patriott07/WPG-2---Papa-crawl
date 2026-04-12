@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7
   itemName: Stick
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32
-  icon: {fileID: 0}
+  icon: {fileID: 7765749759234873141, guid: c159bf6299aee5e44a3219d4857a847d, type: 3}

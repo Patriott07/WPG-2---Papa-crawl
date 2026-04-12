@@ -16,7 +16,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
     void Start()
     {
-        player = PlayerHit.Instance.transform;
+        // player = PlayerHit.Instance.transform;
     }
 
     void LateUpdate()
@@ -31,22 +31,22 @@ public class CameraFollowPlayer : MonoBehaviour
         // transform.LookAt(player);
     }
 
-    public void TransitionCamSize(Rigidbody2D rb, bool isRun)
-    {
-        float targetZoom;
+    // public void TransitionCamSize(Rigidbody2D rb, bool isRun)
+    // {
+    //     float targetZoom;
 
-        // Cek apakah player bergerak
-        if (rb.linearVelocity.magnitude > 0.1f)
-        {
-            if(isRun) targetZoom = cameraSizeWhileRun;
-            else targetZoom = cameraSizeWhileMove;
-        }
-        else
-        {
-            targetZoom = cameraSizeWhileNotMove;
-        }
+    //     // Cek apakah player bergerak
+    //     if (rb.linearVelocity.magnitude > 0.1f)
+    //     {
+    //         if(isRun) targetZoom = cameraSizeWhileRun;
+    //         else targetZoom = cameraSizeWhileMove;
+    //     }
+    //     else
+    //     {
+    //         targetZoom = cameraSizeWhileNotMove;
+    //     }
 
-        // Smooth zoom
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, zoomSpeed * Time.deltaTime);
-    }
+    //     // Smooth zoom
+    //     cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, zoomSpeed * Time.deltaTime);
+    // }
 }

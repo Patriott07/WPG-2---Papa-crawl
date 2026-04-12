@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   itemName: Stone
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32
-  icon: {fileID: 3645410648180966288, guid: 695d2d622419cb540bc9df9cda0a7a3b, type: 3}
+  icon: {fileID: 8460501206089061518, guid: c159bf6299aee5e44a3219d4857a847d, type: 3}

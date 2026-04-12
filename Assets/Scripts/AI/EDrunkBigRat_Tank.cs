@@ -32,6 +32,16 @@ public class EDrunkBigRat_Tank : MonoBehaviour
         Init();
     }
 
+    void TurnOffEnemy()
+    {
+        // isCanChasing = false;
+        target = null;
+        canAttack = false;
+        SetMovePathF(false);
+        aiPath.maxSpeed = 0;
+        aiPath.enabled = false;
+    }
+
     void Start()
     {
         target = PlayerHit.Instance.transform;
@@ -43,18 +53,20 @@ public class EDrunkBigRat_Tank : MonoBehaviour
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
     }
 
     void CalculatedStatEnemy(int minL, int maxL)
     {
         level = Random.Range(minL, maxL);
-        
+
         statEnemy.hp = baseStat.hp + (level * 60);
         statEnemy.att = baseStat.att + (level * 1);
         statEnemy.moveSpeed = baseStat.moveSpeed + (level * 0.01f);
@@ -144,7 +156,7 @@ public class EDrunkBigRat_Tank : MonoBehaviour
     IEnumerator Explode()
     {
         yield return null;
-        
+
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (statEnemy.hp + (level * 14)) / 4);
 

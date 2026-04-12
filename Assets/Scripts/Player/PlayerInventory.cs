@@ -1,11 +1,18 @@
 using UnityEngine;
 using data.structs;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using Player.script;
+using System.Collections;
+
 
 public class PlayerInventory : MonoBehaviour
 {
 
     public int maxSlots = 30;
     public InventorySlot[] slots;
+
+    public List<ItemData> listItemTestWanInsert;
 
     public static PlayerInventory Instance;
 
@@ -17,6 +24,18 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < maxSlots; i++)
         {
             slots[i] = new InventorySlot();
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            foreach (var el in listItemTestWanInsert)
+            {
+                Debug.Log($"Test Element Equipment {el.itemName}");
+                AddItem(el, 1);
+            }
         }
     }
 
@@ -112,5 +131,99 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SortInventory()
+    {
+        List<InventorySlot> occupiedSlots = new List<InventorySlot>();
+        List<InventorySlot> emptySlots = new List<InventorySlot>();
+
+        // 1. Pisahkan mana yang isi dan mana yang kosong
+        foreach (var slot in slots)
+        {
+            if (!slot.IsEmpty())
+                occupiedSlots.Add(slot);
+            else
+                emptySlots.Add(slot);
+        }
+
+        // 2. Gabungkan kembali: Yang isi di depan, yang kosong di belakang
+        int index = 0;
+        foreach (var slot in occupiedSlots)
+        {
+            slots[index] = slot;
+            index++;
+        }
+        foreach (var slot in emptySlots)
+        {
+            slots[index] = slot;
+            index++;
+        }
+
+        Debug.Log("Inventory sorted!");
+    }
+
+    void ClearInventoryWhileDied()
+    {
+        foreach (InventorySlot el in slots)
+        {
+            // TAMBAHKAN PENGECEKAN INI:
+            // Cek apakah slot null atau isinya null agar tidak error
+            if (el == null || el.item == null) continue;
+
+            if (el.item.itemType == ItemType.Equipment)
+            {
+                el.Clear();
+            }
+            else if (el.item.itemType == ItemType.Consumable)
+            {
+                el.Clear();
+            }
+
+        }
+
+        // call saving data
+        StartCoroutine(SaveAndRespawn());
+    }
+
+    IEnumerator SaveAndRespawn()
+    {
+        yield return new WaitForSeconds(2f);
+        SaveSceneManager.Save(PrepareGameState(SceneManager.GetActiveScene().name));
+        yield return new WaitForSeconds(6f);
+        SceneManager.LoadScene(MapIdentity.Instance.lastSaveScene == null || MapIdentity.Instance.lastSaveScene == "" ? "map1" : MapIdentity.Instance.lastSaveScene);
+    }
+
+    public GameState PrepareGameState(string currentMap)
+    {
+        GameState gameState = new GameState();
+        PlayerStatus newStatForRespawn = PlayerStat.Instance.playerStatus;
+        newStatForRespawn.hp = newStatForRespawn.maxHP;
+        newStatForRespawn.stamina = newStatForRespawn.maxStamina;
+
+        gameState.InventoryPlayer = slots;
+
+        // gameState.craftedItem = new List<Item>();
+        gameState.craftedItem = new List<Item>();
+        gameState.player = newStatForRespawn;
+        gameState.weapon = null;
+        gameState.level = PlayerStat.Instance.getLevel();
+        gameState.currentExp = PlayerStat.Instance.expPlayer;
+        gameState.currentScene = currentMap;
+
+        if (MapIdentity.Instance.isSafeArea) gameState.lastSaveScene = SceneManager.GetActiveScene().name;
+        else gameState.lastSaveScene = MapIdentity.Instance.lastSaveScene;
+
+        return gameState;
+    }
+
+    void OnEnable()
+    {
+        GameEvents.OnPlayerDead += ClearInventoryWhileDied;
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnPlayerDead -= ClearInventoryWhileDied;
     }
 }

@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextUIFloats:
-    count: 20
+    count: 60
     gameObject: {fileID: 4904017707243534889, guid: f5e6f8f15056f8f418459b5524676d68, type: 3}
   particleExps:
     count: 70
     gameObject: {fileID: 278406172513466143, guid: 3719c272f9b4e6042ad0c2cf6bbbd12c, type: 3}
+  BigDagger: {fileID: 1761376433890581963, guid: 63b0d8c42baa54c439d14fa8e5f00dba, type: 3}

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   itemName: Crack of Coal
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32
-  icon: {fileID: -7786740890748025741, guid: 493562faf78d2d14b909ee0c3c6bbc53, type: 3}
+  icon: {fileID: -9188895055919195816, guid: 493562faf78d2d14b909ee0c3c6bbc53, type: 3}

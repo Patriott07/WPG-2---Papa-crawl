@@ -27,20 +27,22 @@ public class TriggerChangeMap : MonoBehaviour
     {
         // get current
         PlayerPrefs.SetString("SpawnLoc", spawnLoc.ToString());
-        int mapLevel = PlayerPrefs.GetInt("levelMap", 1);
-        LoadNextLevel(3f, mapLevel);
+        // int mapLevel = PlayerPrefs.GetInt("levelMap", 1);
+        int mapLevel = MapIdentity.Instance.mapLevel;
+        LoadNextLevel(1f, mapLevel);
     }
 
 
     void LoadNextLevel(float loadingDur, int currentLevel)
     {
         Debug.Log("paanggil akuu..");
+
         // save here
         if (spawnLoc == SpawnLoc.FRONT)
             SaveSceneManager.Save(PrepareGameState($"map{currentLevel + 1}"));
         else
             SaveSceneManager.Save(PrepareGameState($"map{currentLevel - 1}"));
-            
+
         StartCoroutine(LoadingUI.Instance.HideForX(loadingDur, () =>
         {
             if (spawnLoc == SpawnLoc.FRONT)
@@ -50,7 +52,7 @@ public class TriggerChangeMap : MonoBehaviour
         }));
     }
 
-    GameState PrepareGameState(string currentMap)
+    public GameState PrepareGameState(string currentMap)
     {
         GameState gameState = new GameState();
 
@@ -61,6 +63,10 @@ public class TriggerChangeMap : MonoBehaviour
         gameState.level = PlayerStat.Instance.getLevel();
         gameState.currentExp = PlayerStat.Instance.expPlayer;
         gameState.currentScene = currentMap;
+
+        if (MapIdentity.Instance.isSafeArea) gameState.lastSaveScene = SceneManager.GetActiveScene().name;
+        else gameState.lastSaveScene = MapIdentity.Instance.lastSaveScene;
+
         return gameState;
     }
 }

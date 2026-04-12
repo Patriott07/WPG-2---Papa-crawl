@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 14
   itemName: Crack of Steel
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32

@@ -2,6 +2,8 @@ using UnityEngine;
 using data.structs;
 using System.Collections;
 using Unity.VisualScripting;
+using DG.Tweening;
+using Player.script;
 
 public class PlayerStat : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerStat : MonoBehaviour
     public int level = 1;
     public float expPlayer;
     public float expRequiredForLevelUp;
+    public bool isAlive = true;
     void Awake()
     {
         Instance = this;
@@ -21,6 +24,8 @@ public class PlayerStat : MonoBehaviour
     void Update()
     {
         CheckLevelUpPlayer();
+        if(Input.GetKeyDown(KeyCode.Alpha9))
+            Dead();
     }
 
     void CheckLevelUpPlayer()
@@ -36,7 +41,7 @@ public class PlayerStat : MonoBehaviour
             // play sound
             StartCoroutine(PlayerSounds.Instance.PlayDelayBeforeSound(0.1f, PlayerSounds.Instance.levelup));
             ShowLevelUpText();
-            
+
             playerStatus.maxHP = baseInit.maxHP + (level * 20);
             playerStatus.hp += playerStatus.maxHP - lastMaxHp;
             playerStatus.attackPoint = baseInit.attackPoint + (level * 3);
@@ -46,7 +51,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    
+
 
     public void GainExp(float v)
     {
@@ -82,18 +87,20 @@ public class PlayerStat : MonoBehaviour
         playerStatus.hp -= damage;
         Debug.Log($"Player getdamage by enemy : {damage}");
 
+        Camera.main.DOShakePosition(0.08f, 0.3f);
+
         if (playerStatus.hp <= 0) Dead();
     }
-    
+
     void ShowLevelUpText()
     {
-          GameObject text = ObjectPollingGame.Instance.GetUITextFloat();
+        GameObject text = ObjectPollingGame.Instance.GetUITextFloat();
         // set color, text, pos
         text.transform.position = new Vector2(transform.position.x + Random.Range(-0.4f, 0.4f), transform.position.y + 0.6f);
         TextUIFloatingDamage scriptText = text.GetComponent<TextUIFloatingDamage>();
         scriptText.colorText = Color.yellow;
         scriptText.textInput = "LEVEL UPP++";
-       
+
         scriptText.textTMP.rectTransform.sizeDelta = new Vector2(200, 65);
         scriptText.textTMP.fontStyle = TMPro.FontStyles.Bold;
         scriptText.dDestroy = 2f;
@@ -137,6 +144,13 @@ public class PlayerStat : MonoBehaviour
     void Dead()
     {
         Debug.Log("Player Deadd");
+        if(!isAlive) return;
+        playerStatus.hp = 0;
+        isAlive = false;
+        canHit = false;
+        PlayerHit.Instance.SetCanShoot(false);
+        PlayerMovement.Instance.SetCanMove(false);
+        GameEvents.OnPlayerDead?.Invoke();
     }
 
 }

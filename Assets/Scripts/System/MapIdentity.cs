@@ -3,21 +3,25 @@ using data.structs;
 using UnityEngine;
 using Player.script;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class MapIdentity : MonoBehaviour
 {
     [Header("Map setting")]
-    [SerializeField] private int mapLevel;
+    [SerializeField] public int mapLevel;
     [SerializeField] private int minEnemyLevel;
     [SerializeField] private int maxEnemyLevel;
-    [SerializeField] private bool isSafeArea = false;
+    [SerializeField] public bool isSafeArea = false;
     [SerializeField] Vector2 FRONTLoc;
     [SerializeField] Vector2 ENDLoc;
 
+    
     public static MapIdentity Instance;
 
     private int countEnemy = 0;
-    public bool isCanCollectExp = false;
+    public bool isCanCollectExp = false, isCanRestartGame;
     Transform playerT;
+
+    public string lastSaveScene;
 
     void Awake()
     {
@@ -57,6 +61,7 @@ public class MapIdentity : MonoBehaviour
     {
         yield return new WaitForSeconds(0.6f);
         GameEvents.GetCollideWithPlayer?.Invoke(playerT);
+        GameEvents.MapClear?.Invoke();
     }
 
     public void SpawnObjectExp(Transform t, float AffectExp)
@@ -104,7 +109,6 @@ public class MapIdentity : MonoBehaviour
         DebugIsiSaveData(gameState);
 
         PlayerPrefs.SetInt("levelMap", mapLevel);
-
         GameEvents.SaveManagerLoaded?.Invoke(gameState);
 
         if (gameState != null)
@@ -116,6 +120,10 @@ public class MapIdentity : MonoBehaviour
             PlayerStat.Instance.setLevel(gameState.level);
             PlayerInventory.Instance.slots = gameState.InventoryPlayer;
             PlayerStat.Instance.playerStatus = gameState.player;
+
+            if(isSafeArea) lastSaveScene = SceneManager.GetActiveScene().name;
+            else
+            lastSaveScene = gameState.lastSaveScene ?? "map1";
         }
         else
         {
@@ -125,13 +133,17 @@ public class MapIdentity : MonoBehaviour
 
     void GenerateSaveDat()
     {
+        // delete first
+        SaveSceneManager.DeleteSaveFile();
+
         GameState gameState1 = new GameState();
 
         gameState1.level = 3;
         gameState1.currentScene = "map1";
+        gameState1.lastSaveScene = "map1";
         gameState1.InventoryPlayer = new InventorySlot[30];
         // gameState1.weapon = new Weapon();
-        gameState1.weapon = new Weapon(1,"Slingshot", 25, 34, 5, 5f,2, 6, -4.8f, 10);
+        gameState1.weapon = null;
         gameState1.player = new PlayerStatus(30, 5, 6f, 5, 30);
         gameState1.currentExp = 0;
 
@@ -144,7 +156,8 @@ public class MapIdentity : MonoBehaviour
         Debug.Log($"cuurent scene : {gs.currentScene}");
         Debug.Log($"cuurent exp player : {gs.currentExp}");
         Debug.Log($"cuurent level player : {gs.level}");
-        Debug.Log($"cuurent level player : {gs.weapon.name}");
+        Debug.Log($"cuurent weapon player : {gs.weapon?.name ?? "Kosong"}");
+        Debug.Log($"savemap : {gs.lastSaveScene}");
     }
 
     IEnumerator DelayInit(float d)
@@ -156,10 +169,11 @@ public class MapIdentity : MonoBehaviour
     void PreparePlayerLoc()
     {
         if (PlayerPrefs.GetString("SpawnLoc", "FRONT") == "FRONT") PlayerHit.Instance.transform.position = FRONTLoc;
-        else PlayerHit.Instance.transform.position = ENDLoc;
+        // else PlayerHit.Instance.transform.position = ENDLoc;
+        else PlayerHit.Instance.transform.position = FRONTLoc;
     }
 
-    void PreparePlayerWeapon(Weapon weapon)
+    void PreparePlayerWeapon(Weapon? weapon)
     {
         PlayerHit.Instance.SetWeapon(weapon);
     }

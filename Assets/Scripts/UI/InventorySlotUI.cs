@@ -10,7 +10,7 @@ public class InventorySlotUI : MonoBehaviour
 
     public void UpdateUI(InventorySlot slot)
     {
-        if (slot.IsEmpty())
+        if (slot == null || slot.IsEmpty())
         {
             icon.enabled = false;
             quantityText.text = "";
@@ -19,7 +19,9 @@ public class InventorySlotUI : MonoBehaviour
         {
             icon.enabled = true;
             icon.sprite = slot.item.icon;
-            quantityText.text = slot.quantity.ToString();
+
+            // Tampilkan angka jika item lebih dari 1, kalau cuma 1 biasanya tidak perlu angka
+            quantityText.text = slot.quantity > 1 ? slot.quantity.ToString() : "";
         }
     }
 }

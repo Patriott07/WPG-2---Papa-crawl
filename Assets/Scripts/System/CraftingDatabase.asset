@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1092cc2ac5449864292e0e20909ae047, type: 3}
+  m_Name: CraftingDatabase
+  m_EditorClassIdentifier: 
+  allRecipes:
+  - result: {fileID: 11400000, guid: ea3bbdbde2d438847adc6178b6279d28, type: 2}
+    resultAmount: 1
+    levelRequired: 1
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    amounts: 0500000002000000
+  - result: {fileID: 11400000, guid: da527950af913a342a6daef3f28a8280, type: 2}
+    resultAmount: 1
+    levelRequired: 3
+    ingredients:
+    - {fileID: 11400000, guid: ea3bbdbde2d438847adc6178b6279d28, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: b3f2e9f12dbd01b4ea5f6b7e5cd250c2, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 010000000d0000000300000002000000
+  - result: {fileID: 11400000, guid: 119d1bd04cc984446ba3659bf3c4a5ee, type: 2}
+    resultAmount: 1
+    levelRequired: 10
+    ingredients:
+    - {fileID: 11400000, guid: da527950af913a342a6daef3f28a8280, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    - {fileID: 11400000, guid: 0d1289d9236ed3e4cb9909839527b1b3, type: 2}
+    amounts: 010000001b0000000600000005000000
+  - result: {fileID: 11400000, guid: afa6cb75b5708bf409cb5ee2d0164d2d, type: 2}
+    resultAmount: 1
+    levelRequired: 3
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: f49eb8a5d6499114ebae17b61ed2f6ab, type: 2}
+    - {fileID: 11400000, guid: 4bdcc708fc128f0428839d3e47b8e102, type: 2}
+    amounts: 040000000300000006000000
+  - result: {fileID: 11400000, guid: 1a668292ccb031b4db2814ed3e8558aa, type: 2}
+    resultAmount: 1
+    levelRequired: 3
+    ingredients:
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 303be09bc316d40468b89852e491b089, type: 2}
+    amounts: 050000000a00000003000000

@@ -39,7 +39,7 @@ public class ETikusLiarR : MonoBehaviour
     }
 
     void CalculatedStatEnemy(int minL, int maxL)
-    { 
+    {
         level = Random.Range(minL, maxL);
         statEnemy.hp = baseInit.hp + (level * 30);
         statEnemy.att = baseInit.att + (level * 10);
@@ -51,13 +51,15 @@ public class ETikusLiarR : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
-         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
-         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
     }
 
     void GetDamage(string instanceID, float d)
@@ -72,12 +74,23 @@ public class ETikusLiarR : MonoBehaviour
             Dead();
     }
 
+
+    void TurnOffEnemy()
+    {
+        // isCanChasing = false;
+        target = null;
+        canAttack = false;
+        SetMovePathF(false);
+        aIPath.maxSpeed = 0;
+        aIPath.enabled = false;
+    }
+
     void Dead()
     {
-        if(!isAlive) return;
+        if (!isAlive) return;
         isAlive = false;
         SetMovePathF(false);
-        
+
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
 

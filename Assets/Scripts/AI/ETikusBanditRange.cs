@@ -47,11 +47,11 @@ public class ETikusBanditRange : MonoBehaviour
         mainRoutine = StartCoroutine(MainAI());
     }
 
-      void CalculatedStatEnemy(int minL, int maxL)
+    void CalculatedStatEnemy(int minL, int maxL)
     {
         level = Random.Range(minL, maxL);
         statEnemy.hp = baseInit.hp + (level * 20);
-        statEnemy.att = baseInit.att + ( level * 8);
+        statEnemy.att = baseInit.att + (level * 8);
         statEnemy.moveSpeed = baseInit.moveSpeed + (level * 0.01f);
 
         Debug.Log($"{gameObject.name} Sudah dihitung berdasarkan level");
@@ -60,13 +60,15 @@ public class ETikusBanditRange : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
-         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
-         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
+        GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
     }
 
     // ==========================
@@ -112,7 +114,7 @@ public class ETikusBanditRange : MonoBehaviour
 
         StartCoroutine(SpawnProjectile());
 
-        yield return new WaitForSeconds(0.6f); // cooldown
+        yield return new WaitForSeconds(2.1f); // cooldown
         isAttacking = false;
     }
 
@@ -151,16 +153,26 @@ public class ETikusBanditRange : MonoBehaviour
 
     void Dead()
     {
-        if(!isAlive) return;
+        if (!isAlive) return;
         isAlive = false;
         aiPath.canMove = false;
         GetComponent<SpriteRenderer>().color = Color.blue;
 
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
-        
+
         StopAllCoroutines();
         Destroy(gameObject);
+    }
+
+    void TurnOffEnemy()
+    {
+        // isCanChasing = false;
+        target = null;
+        isAlive = false;
+        SetMovePathF(false);
+        aiPath.maxSpeed = 0;
+        aiPath.enabled = false;
     }
 
     // ==========================

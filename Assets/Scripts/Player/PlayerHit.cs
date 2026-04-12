@@ -10,10 +10,16 @@ namespace Player.script
         [SerializeField] List<GameObject> projectiles;
         [SerializeField] LayerMask enemyLayer;
         float attackTimer;
-        bool canShoot = false;
-        private Weapon weapon;
+        public bool canShoot = false, isNearWithBlckSmith = false;
+        public Weapon? weapon;
         [SerializeField] GameObject projectile;
         PlayerStat playerStat;
+        public Transform transformWeapon;
+        public List<Sprite> spritesOfWeapon;
+        public List<Sprite> spritesOfArmor;
+
+        [Header("Debug Info")]
+        [SerializeField] private Weapon weaponDebug; // Ini yang bakal tampil di Inspector
 
         public static PlayerHit Instance;
 
@@ -22,6 +28,7 @@ namespace Player.script
         {
             // weapon = new Weapon("Bow", 5, 3, 10, 4, Weapons.Bow);
             playerStat = gameObject.GetComponent<PlayerStat>();
+            SetWeapon(ModelsData.GetListOfWeapon1()[0]);
         }
 
         void Awake()
@@ -30,24 +37,54 @@ namespace Player.script
             // weapon = ModelsData.weaponsModel1.Find((val) => val.ID == 1);
         }
 
-        public void SetWeapon(Weapon newWeapon) => weapon = newWeapon;
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("BlackSmith"))
+            {
+                isNearWithBlckSmith = true;
+            }
+        }
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("BlackSmith"))
+            {
+                isNearWithBlckSmith = false;
+            }
+
+        }
+
+        void ChangeModelWeapon(int i)
+        {
+            PlayerMovement.Instance.spWeapon.sprite = spritesOfWeapon[i];
+        }
+
+        public void SetCanShoot(bool state) => canShoot = state;
+        public void SetWeapon(Weapon? newWeapon) => weapon = newWeapon;
         void ChangeWeapon()
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                Weapon lastWeapon = weapon;
-                if (lastWeapon.ID >= ModelsData.weaponsModel1.Count)
+                Weapon? lastWeapon = weapon;
+                Debug.Log($"OKE {lastWeapon?.name} || {lastWeapon?.ID}");
+                // Cara 1: Menggunakan Value (Paling aman untuk Nullable)
+
+                if (lastWeapon?.ID >= ModelsData.weaponsModel1.Count)
                 {
+                    Debug.Log($"OKE 1");
                     weapon = ModelsData.weaponsModel1.Find((val) => val.ID == 1);
+                    ChangeModelWeapon(weapon != null ? weapon.Value.ID - 1 : 0);
                 }
                 else
                 {
-                    weapon = ModelsData.weaponsModel1.Find((val) => val.ID == lastWeapon.ID + 1);
+                    Debug.Log($"OKE 2");
+                    weapon = ModelsData.weaponsModel1.Find((val) => val.ID == lastWeapon?.ID + 1);
+                    ChangeModelWeapon(weapon != null ? weapon.Value.ID - 1 : 0);
+                    // weapon = ModelsData.weaponsModel1[lastWeapon?.ID + 1 ?? ];
                 }
             }
         }
 
-        public Weapon GetCurrentWeapon() => weapon;
+        public Weapon? GetCurrentWeapon() => weapon;
         void SetIsCanShot(bool stateMove)
         {
             if (stateMove)
@@ -71,6 +108,42 @@ namespace Player.script
         {
             Attack();
             ChangeWeapon();
+
+            // Kalau weapon lagi null, kita pakai default (kosong)
+            weaponDebug = weapon ?? default;
+
+            // Panggil fungsi rotasi setiap frame agar halus
+            RotateWeaponToTarget();
+
+            if (Input.GetKeyDown(KeyCode.G) && isNearWithBlckSmith)
+                CraftingManager.Instance.OpenClosePanel();
+        }
+
+        void RotateWeaponToTarget()
+        {
+            Transform target = FindClosestEnemy();
+
+            if (target != null && transformWeapon != null && weapon.HasValue)
+            {
+                Vector3 direction = target.position - transformWeapon.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+                // TAMBAHKAN OFFSET DI SINI
+                float finalAngle = angle + weapon.Value.offsetAngleView;
+
+                transformWeapon.rotation = Quaternion.Euler(0, 0, finalAngle);
+
+                // Flip logic agar tidak terbalik
+                if (direction.x < 0)
+                {
+                    // Jika di-flip, offset juga harus disesuaikan sedikit atau pakai cara ini:
+                    transformWeapon.localScale = new Vector3(0.8f, -0.8f, 0.8f);
+                }
+                else
+                {
+                    transformWeapon.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                }
+            }
         }
 
         void Attack()
@@ -84,7 +157,7 @@ namespace Player.script
                 // Debug.Log("Tidak ada enemy dalam range");
             }
 
-            if (target != null && attackTimer >= CalculateAttackSpeed())
+            if (weapon != null && target != null && attackTimer >= CalculateAttackSpeed())
             {
                 Shoot(target);
                 attackTimer = 0f;
@@ -98,7 +171,7 @@ namespace Player.script
 
             // jika nilainya positif maka (makin lambat)
             // jika nilainya negatif maka (makin cepat)
-            float impactAttackSpeed = weapon.attackSpeedImpact;
+            float impactAttackSpeed = weapon?.attackSpeedImpact ?? 0;
 
             float result = playerStat.playerStatus.attackSpeed + impactAttackSpeed;
 
@@ -109,21 +182,22 @@ namespace Player.script
         // calculate Damage
         float CalculateDamage()
         {
-            float result = playerStat.playerStatus.attackPoint + weapon.damage;
+            float result = playerStat.playerStatus.attackPoint + weapon?.damage ?? 0;
             return result;
         }
 
         // calculate movement speed 
         public float GetMovementImpact()
         {
-            float result = weapon.movementImpact / 2;
+            float result = weapon?.movementImpact / 2 ?? 0;
             return result;
         }
 
         // calculate range (stat, level)
         float CalculateRange()
         {
-            float result = playerStat.playerStatus.attackPoint + weapon.range;
+            // float result = playerStat.playerStatus.attackPoint + weapon?.range ?? 0;
+            float result = weapon?.range ?? 0;
             return result;
         }
 
@@ -151,19 +225,19 @@ namespace Player.script
         {
             if (!canShoot) return;
 
-            GameObject arrow = Instantiate(projectiles[weapon.ID - 1], transform.position, Quaternion.identity);
+            GameObject arrow = Instantiate(projectiles[weapon?.ID - 1 ?? 0], transform.position, Quaternion.identity);
             Vector3 direction = (target.position - transform.position).normalized;
             ArrowSystem projectile = arrow.GetComponent<ArrowSystem>();
 
-            Camera.main.DOShakePosition(0.08f, 0.1f + ((weapon.damage / 50) * 0.3f));
-            projectile.Init(direction, weapon.lifetime, CalculateDamage(), weapon.speed, weapon.knockbackStrength);
+            // Camera.main.DOShakePosition(0.08f, 0.1f + ((weapon.damage / 50) * 0.3f));
+            projectile.Init(direction, weapon?.lifetime ?? 0, CalculateDamage(), weapon?.speed ?? 0, weapon?.knockbackStrength ?? 0);
 
             PlaySound();
         }
 
         void PlaySound()
         {
-            switch (weapon.ID)
+            switch (weapon?.ID)
             {
                 case 1:
                     PlayerSounds.Instance.slingshot.Stop();

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 16
   itemName: Crack of Obsidian
+  Description: 
   itemType: 1
   isStackable: 1
   maxStack: 32
-  icon: {fileID: 7718413494078612352, guid: 493562faf78d2d14b909ee0c3c6bbc53, type: 3}
+  icon: {fileID: -3594332234526731787, guid: c159bf6299aee5e44a3219d4857a847d, type: 3}
