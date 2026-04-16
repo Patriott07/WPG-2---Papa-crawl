@@ -88,6 +88,7 @@ public class ExpParticle : MonoBehaviour
                 Debug.Log($"Player Gain Exp {expAffect}");
                 PlayerStat.Instance.GainExp(expAffect);
                 gameObject.GetComponent<SoundForItem>().PlaySound(false);
+                HUDUI.Instance.UpdateFillExp();
                 // gameObject.SetActive(false);
                 StartCoroutine(SetActiveFalseWithDelay(0.6f));
             }

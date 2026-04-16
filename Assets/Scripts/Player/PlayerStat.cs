@@ -24,7 +24,7 @@ public class PlayerStat : MonoBehaviour
     void Update()
     {
         CheckLevelUpPlayer();
-        if(Input.GetKeyDown(KeyCode.Alpha9))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
             Dead();
     }
 
@@ -40,18 +40,27 @@ public class PlayerStat : MonoBehaviour
 
             // play sound
             StartCoroutine(PlayerSounds.Instance.PlayDelayBeforeSound(0.1f, PlayerSounds.Instance.levelup));
-            ShowLevelUpText();
+            // ShowLevelUpText();
+            HUDUI.Instance.ShowNotifLevelUp();
 
             playerStatus.maxHP = baseInit.maxHP + (level * 20);
             playerStatus.hp += playerStatus.maxHP - lastMaxHp;
             playerStatus.attackPoint = baseInit.attackPoint + (level * 3);
             playerStatus.critDamage = baseInit.critDamage + (level * 0.01f);
 
+            HUDUI.Instance.UpdateFillExp();
+            HUDUI.Instance.UpdateFillHP();
+            HUDUI.Instance.UpdateHUD();
+
             Debug.Log("Player Level Up");
         }
     }
 
-
+    public void GainHP(float v)
+    {
+        playerStatus.hp += v;
+        if(playerStatus.hp >= playerStatus.maxHP) playerStatus.hp = playerStatus.maxHP;
+    }
 
     public void GainExp(float v)
     {
@@ -62,6 +71,7 @@ public class PlayerStat : MonoBehaviour
     void CalculateBaseStatByLevel(GameState gs)
     {
         playerStatus.maxHP = baseInit.maxHP + (gs.level * 20);
+        playerStatus.hp = gs.player.hp;
         playerStatus.attackPoint = baseInit.attackPoint + (gs.level * 3);
         playerStatus.critDamage = baseInit.critDamage + (gs.level * 0.01f);
 
@@ -69,6 +79,10 @@ public class PlayerStat : MonoBehaviour
         expPlayer = gs.currentExp;
 
         expRequiredForLevelUp = 150 * (level + 1) * 1.5f;
+
+        HUDUI.Instance.UpdateFillHP();
+        HUDUI.Instance.UpdateFillExp();
+        HUDUI.Instance.UpdateHUD();
 
         Debug.Log($"Sudah dihitung  Level Player : {level}, {expPlayer}, need {expRequiredForLevelUp} for level up");
     }
@@ -88,6 +102,7 @@ public class PlayerStat : MonoBehaviour
         Debug.Log($"Player getdamage by enemy : {damage}");
 
         Camera.main.DOShakePosition(0.08f, 0.3f);
+        HUDUI.Instance.UpdateFillHP();
 
         if (playerStatus.hp <= 0) Dead();
     }
@@ -144,7 +159,7 @@ public class PlayerStat : MonoBehaviour
     void Dead()
     {
         Debug.Log("Player Deadd");
-        if(!isAlive) return;
+        if (!isAlive) return;
         playerStatus.hp = 0;
         isAlive = false;
         canHit = false;

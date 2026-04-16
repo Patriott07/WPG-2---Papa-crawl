@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 42
   itemName: Cross Trigger
-  itemType: 3
+  Description: 
+  itemType: 4
   isStackable: 0
   maxStack: 1
   icon: {fileID: 0}

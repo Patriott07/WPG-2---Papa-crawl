@@ -32,11 +32,13 @@ public class ETikusBanditMele : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     AIPath aiPath;
     EnemyPathFinderCust enemyPathFinderCust;
+      EnemyDropSystem itemDropScript;
 
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         aiPath = GetComponent<AIPath>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
         enemyPathFinderCust = GetComponent<EnemyPathFinderCust>();
         Init();
     }
@@ -78,7 +80,7 @@ public class ETikusBanditMele : MonoBehaviour
         isAlive = false;
         SetMovePathF(false);
         aiPath.maxSpeed = 0;
-          aiPath.enabled = false;
+        aiPath.enabled = false;
     }
 
     void OnEnable()
@@ -167,6 +169,7 @@ public class ETikusBanditMele : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.blue;
 
         MapIdentity.Instance.DecreaseEnemyCount();
+        if (itemDropScript != null) StartCoroutine(itemDropScript.StartDrop()); // drop item
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
 
         StopAllCoroutines();

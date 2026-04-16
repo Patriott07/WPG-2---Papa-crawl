@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 35
   itemName: Handle Slingshot
   Description: 
-  itemType: 3
+  itemType: 4
   isStackable: 0
   maxStack: 1
   icon: {fileID: -1265872457109709990, guid: 905168b4b9b6c0c42ae667bd6f1dfa5b, type: 3}

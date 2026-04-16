@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 5606700382546941390}
   - component: {fileID: 7232676717335862272}
   - component: {fileID: 8661081746129999054}
-  - component: {fileID: 4056954211385558453}
+  - component: {fileID: 7457394902679586090}
   m_Layer: 0
   m_Name: slot_inv
   m_TagString: Untagged
@@ -286,7 +286,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &4056954211385558453
+--- !u!114 &7457394902679586090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,3 +300,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 6315949675287053166}
   quantityText: {fileID: 8343720591590320668}
+  itemData: {fileID: 0}

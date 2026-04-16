@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Item37Attc_bow1
   m_EditorClassIdentifier: 
   id: 37
-  itemName: Arrow Head Silver
-  itemType: 3
+  itemName: Arrow Head Crsytal
+  Description: 
+  itemType: 4
   isStackable: 0
   maxStack: 1
-  icon: {fileID: 0}
+  icon: {fileID: 4909050789193459730, guid: ffc78819a1e2bf045a7854f7e2b36d8e, type: 3}

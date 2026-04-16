@@ -29,11 +29,13 @@ public class ETikusBanditRange : MonoBehaviour
     EnemyPathFinderCust enemyPathFinderCust;
 
     Coroutine mainRoutine;
+      EnemyDropSystem itemDropScript;
 
     void Awake()
     {
         aiPath = GetComponent<AIPath>();
         enemyPathFinderCust = GetComponent<EnemyPathFinderCust>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
         Init();
     }
 
@@ -159,6 +161,7 @@ public class ETikusBanditRange : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.blue;
 
         MapIdentity.Instance.DecreaseEnemyCount();
+          if(itemDropScript != null) StartCoroutine(itemDropScript.StartDrop()); // drop item
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
 
         StopAllCoroutines();

@@ -19,9 +19,11 @@ public class ENestLarva : MonoBehaviour
     // COMPONENT HELPER
     // ==========================
     AIPath aIPath;
+    EnemyDropSystem itemDropScript;
     void Awake()
     {
         aIPath = gameObject.GetComponent<AIPath>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
         Init();
         spawnCount = Random.Range(minSpawn, maxSpawn);
     }
@@ -30,7 +32,7 @@ public class ENestLarva : MonoBehaviour
         target = PlayerHit.Instance.transform;
     }
 
-     void TurnOffEnemy()
+    void TurnOffEnemy()
     {
         isCanChasing = false;
         target = null;
@@ -53,14 +55,14 @@ public class ENestLarva : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnEnemyGetDamage += GetDamage;
-         GameEvents.OnPlayerDead += TurnOffEnemy;
+        GameEvents.OnPlayerDead += TurnOffEnemy;
         GameEvents.CalculateEnemyStatByMapLevel += CalculatedStatEnemy;
     }
 
     void OnDisable()
     {
         GameEvents.OnEnemyGetDamage -= GetDamage;
-         GameEvents.OnPlayerDead -= TurnOffEnemy;
+        GameEvents.OnPlayerDead -= TurnOffEnemy;
         GameEvents.CalculateEnemyStatByMapLevel -= CalculatedStatEnemy;
     }
 
@@ -141,9 +143,10 @@ public class ENestLarva : MonoBehaviour
 
     void Dead()
     {
-        if(!isAlive) return;
+        if (!isAlive) return;
         isAlive = false;
         MapIdentity.Instance.DecreaseEnemyCount();
+        if (itemDropScript != null) StartCoroutine(itemDropScript.StartDrop()); // drop item
         MapIdentity.Instance.SpawnObjectExp(transform, ((baseInit.hp / 4) + (level * 14)) / 4);
         CheckRange(); // damage radius
         for (int i = 0; i < spawnCount; i++)

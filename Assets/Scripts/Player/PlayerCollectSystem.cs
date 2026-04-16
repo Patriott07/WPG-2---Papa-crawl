@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollectSystem : MonoBehaviour
@@ -11,7 +12,8 @@ public class PlayerCollectSystem : MonoBehaviour
             // Play sound
             PlayerSounds.Instance.collect2.Play();
             PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
-            ShowTextCollectingItem(currentItem.name);
+            // ShowTextCollectingItem(currentItem.name);
+            HUDUI.Instance.AddNotifItem(currentItem.itemData.icon, $"{currentItem.itemData.itemName} +1");
 
             if (inventory != null)
             {

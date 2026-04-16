@@ -56,6 +56,7 @@ namespace Player.script
         void ChangeModelWeapon(int i)
         {
             PlayerMovement.Instance.spWeapon.sprite = spritesOfWeapon[i];
+            HUDUI.Instance.UpdateHUD();
         }
 
         public void SetCanShoot(bool state) => canShoot = state;
@@ -225,13 +226,14 @@ namespace Player.script
         {
             if (!canShoot) return;
 
-            GameObject arrow = Instantiate(projectiles[weapon?.ID - 1 ?? 0], transform.position, Quaternion.identity);
-            Vector3 direction = (target.position - transform.position).normalized;
+            Vector3 shootPos = transform.position;
+            shootPos.y -= 0.15f;
+
+            GameObject arrow = Instantiate(projectiles[weapon?.ID - 1 ?? 0], shootPos, Quaternion.identity);
+            Vector3 direction = (target.position - shootPos).normalized;
             ArrowSystem projectile = arrow.GetComponent<ArrowSystem>();
 
-            // Camera.main.DOShakePosition(0.08f, 0.1f + ((weapon.damage / 50) * 0.3f));
             projectile.Init(direction, weapon?.lifetime ?? 0, CalculateDamage(), weapon?.speed ?? 0, weapon?.knockbackStrength ?? 0);
-
             PlaySound();
         }
 

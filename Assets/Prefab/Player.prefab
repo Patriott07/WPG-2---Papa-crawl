@@ -400,6 +400,21 @@ MonoBehaviour:
   - {fileID: 1126490223466180966, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}
   - {fileID: 2956180805967829634, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}
   - {fileID: -5114758474589342736, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}
+  weaponDebug:
+    ID: 0
+    name: 
+    speed: 0
+    damage: 0
+    range: 0
+    lifetime: 0
+    penetration: 0
+    level: 0
+    knockbackStrength: 0
+    movementImpact: 0
+    attackSpeedImpact: 0
+    maxAttachment: 0
+    offsetAngleView: 0
+    attachments: 
 --- !u!114 &8238835013289609364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +488,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000011920929, y: -0.19348615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -483,7 +498,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2246926, y: 1.7115296}
   m_EdgeRadius: 0
 --- !u!95 &5212311304485105359
 Animator:
@@ -521,11 +536,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSlots: 30
   slots: []
+  slotsQuickHUD: []
   listItemTestWanInsert:
   - {fileID: 11400000, guid: 4bdcc708fc128f0428839d3e47b8e102, type: 2}
   - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
   - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
   - {fileID: 11400000, guid: f49eb8a5d6499114ebae17b61ed2f6ab, type: 2}
+  - {fileID: 11400000, guid: 8a7c545ea80367a46aabd379616cad88, type: 2}
+  - {fileID: 11400000, guid: 841d5d61d9badc54e88a1bdf4d297757, type: 2}
+  - {fileID: 11400000, guid: b0420939112b13a4ead810c0ccd786bd, type: 2}
 --- !u!114 &4876281732484421570
 MonoBehaviour:
   m_ObjectHideFlags: 0

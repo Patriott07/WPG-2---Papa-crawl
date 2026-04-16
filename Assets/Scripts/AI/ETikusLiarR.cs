@@ -22,9 +22,11 @@ public class ETikusLiarR : MonoBehaviour
     // ==========================
     AIPath aIPath;
     EnemyPathFinderCust enemyPathFinderCust;
+    EnemyDropSystem itemDropScript;
     void Awake()
     {
         aIPath = gameObject.GetComponent<AIPath>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
         enemyPathFinderCust = gameObject.GetComponent<EnemyPathFinderCust>();
         Init();
     }
@@ -90,6 +92,8 @@ public class ETikusLiarR : MonoBehaviour
         if (!isAlive) return;
         isAlive = false;
         SetMovePathF(false);
+
+        if (itemDropScript != null) StartCoroutine(itemDropScript.StartDrop()); // drop item
 
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);

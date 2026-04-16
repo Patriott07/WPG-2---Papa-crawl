@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Item39Attc_bow3
   m_EditorClassIdentifier: 
   id: 39
-  itemName: Thread Hursk
-  itemType: 3
+  itemName: Bow Handle
+  Description: 
+  itemType: 4
   isStackable: 0
   maxStack: 1
-  icon: {fileID: 0}
+  icon: {fileID: 6931715678036376504, guid: ffc78819a1e2bf045a7854f7e2b36d8e, type: 3}

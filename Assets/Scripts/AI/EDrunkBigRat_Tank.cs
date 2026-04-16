@@ -24,11 +24,13 @@ public class EDrunkBigRat_Tank : MonoBehaviour
     // COMPONENT
     AIPath aiPath;
     EnemyPathFinderCust enemyPathFinderCust;
+    EnemyDropSystem itemDropScript;
 
     void Awake()
     {
         aiPath = GetComponent<AIPath>();
         enemyPathFinderCust = GetComponent<EnemyPathFinderCust>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
         Init();
     }
 
@@ -104,6 +106,7 @@ public class EDrunkBigRat_Tank : MonoBehaviour
 
         isAlive = false;
         aiPath.canMove = false;
+        if(itemDropScript != null) StartCoroutine(itemDropScript.StartDrop()); // drop item
         GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         StartCoroutine(Explode());
         // Destroy(gameObject, 1.2f);

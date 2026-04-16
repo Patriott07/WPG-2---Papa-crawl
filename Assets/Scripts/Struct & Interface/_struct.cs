@@ -11,7 +11,8 @@ namespace data.structs
     {
         Consumable,   // bisa dipakai (potion, food)
         Material,     // bahan crafting
-        Equipment,    // senjata, armor
+        Equipment,    // senjata
+        Armor,    //  armor
         Attachment,    // attachment
         Quest,         // item quest
     }
@@ -44,6 +45,13 @@ namespace data.structs
             item = null;
             quantity = 0;
         }
+    }
+
+    [System.Serializable]
+    public class ItemDropEnemy
+    {
+         public List<GameObject> itemPrefabs;
+        public List<int> qtys;
     }
 
     public enum Weapons
@@ -81,7 +89,7 @@ namespace data.structs
         // public Weapons attachmentWeapon; // gunanya apa?
 
         public List<AttachmentWeaponType> attachments;
-        public Weapon(int ID, string name, int speed, float damage, float range, float lifetime, int maxAttachment, float movementImpact, float attackSpeedImpact, float knockbackStrength,float angleView)
+        public Weapon(int ID, string name, int speed, float damage, float range, float lifetime, int maxAttachment, float movementImpact, float attackSpeedImpact, float knockbackStrength, float angleView)
         {
             this.ID = ID;
             this.name = name;
@@ -190,7 +198,7 @@ namespace data.structs
         public PlayerStatus player;
         public Weapon? weapon;
         public List<Item> craftedItem;
-        public  InventorySlot[] InventoryPlayer; 
+        public InventorySlot[] InventoryPlayer;
         public string currentScene;
         public string lastSaveScene;
         public int level;

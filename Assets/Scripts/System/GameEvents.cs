@@ -24,6 +24,8 @@ public class GameEvents : MonoBehaviour
 
     // =====================================
     // UI
+    public static Action<ItemData> ChangeDetailOfInventoryItem;
+
     
     // =====================================
 

@@ -54,3 +54,112 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
     - {fileID: 11400000, guid: 303be09bc316d40468b89852e491b089, type: 2}
     amounts: 050000000a00000003000000
+  - result: {fileID: 11400000, guid: c400edd24f2189c4f9fb2752dbcf6955, type: 2}
+    resultAmount: 1
+    levelRequired: 3
+    ingredients:
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    - {fileID: 11400000, guid: 303be09bc316d40468b89852e491b089, type: 2}
+    amounts: 0300000002000000
+  - result: {fileID: 11400000, guid: 8b8c393e2393d7249b42b2699a687975, type: 2}
+    resultAmount: 1
+    levelRequired: 5
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    amounts: 0700000003000000
+  - result: {fileID: 11400000, guid: 84b6dd1b363280f4eac30c61c07fbdf5, type: 2}
+    resultAmount: 1
+    levelRequired: 9
+    ingredients:
+    - {fileID: 11400000, guid: 8b8c393e2393d7249b42b2699a687975, type: 2}
+    - {fileID: 11400000, guid: 303be09bc316d40468b89852e491b089, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 01000000040000001000000002000000
+  - result: {fileID: 11400000, guid: 3c99c47c9d04df24895e2eacbb6dfea0, type: 2}
+    resultAmount: 1
+    levelRequired: 15
+    ingredients:
+    - {fileID: 11400000, guid: 84b6dd1b363280f4eac30c61c07fbdf5, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    - {fileID: 11400000, guid: eb10d68c607a0a741a45a4e77c192710, type: 2}
+    amounts: 010000001d0000000600000005000000
+  - result: {fileID: 11400000, guid: ff60686bd86e8d34d8f873fc474e2345, type: 2}
+    resultAmount: 1
+    levelRequired: 9
+    ingredients:
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    - {fileID: 11400000, guid: f49eb8a5d6499114ebae17b61ed2f6ab, type: 2}
+    amounts: 0600000005000000
+  - result: {fileID: 11400000, guid: 4bd968b43c0760e4c80c627cefe036fd, type: 2}
+    resultAmount: 1
+    levelRequired: 9
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    amounts: 0700000004000000
+  - result: {fileID: 11400000, guid: 3a486996fe1cb7840ac32a79764d4072, type: 2}
+    resultAmount: 1
+    levelRequired: 15
+    ingredients:
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    - {fileID: 11400000, guid: f49eb8a5d6499114ebae17b61ed2f6ab, type: 2}
+    amounts: 0800000007000000
+  - result: {fileID: 11400000, guid: a2bb1fd6bea8bc04c8754859aac60b91, type: 2}
+    resultAmount: 1
+    levelRequired: 9
+    ingredients:
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    - {fileID: 11400000, guid: b3f2e9f12dbd01b4ea5f6b7e5cd250c2, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 080000000300000004000000
+  - result: {fileID: 11400000, guid: 7c35645607c305346a9c63b2f7487c3f, type: 2}
+    resultAmount: 1
+    levelRequired: 15
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    amounts: 010000001d0000000600000005000000
+  - result: {fileID: 11400000, guid: bc3e7a865a437b2418ba674b55e0bd8e, type: 2}
+    resultAmount: 1
+    levelRequired: 19
+    ingredients:
+    - {fileID: 11400000, guid: 7c35645607c305346a9c63b2f7487c3f, type: 2}
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 01000000150000000c000000
+  - result: {fileID: 11400000, guid: c3d14af6fcc6b7c4e90ff01a871c583c, type: 2}
+    resultAmount: 1
+    levelRequired: 25
+    ingredients:
+    - {fileID: 11400000, guid: bc3e7a865a437b2418ba674b55e0bd8e, type: 2}
+    - {fileID: 11400000, guid: efb112f155633ac4080a4deb82cafc98, type: 2}
+    - {fileID: 11400000, guid: 7492fdce96ef46d4fabe1444ada65a2f, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 010000000d0000000a0000000e000000
+  - result: {fileID: 11400000, guid: 6c871a90fa343d843add6702d803b397, type: 2}
+    resultAmount: 1
+    levelRequired: 19
+    ingredients:
+    - {fileID: 11400000, guid: 0716a4bf46d7c35449f13d1005993b33, type: 2}
+    - {fileID: 11400000, guid: eb10d68c607a0a741a45a4e77c192710, type: 2}
+    amounts: 0600000008000000
+  - result: {fileID: 11400000, guid: 30b9acb2094f2e945aad5e748fdd03b5, type: 2}
+    resultAmount: 1
+    levelRequired: 19
+    ingredients:
+    - {fileID: 11400000, guid: 0cc68d3089899bc42870fcac67fc289d, type: 2}
+    - {fileID: 11400000, guid: 0716a4bf46d7c35449f13d1005993b33, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 050000000400000006000000
+  - result: {fileID: 11400000, guid: 062ba39a74322ff429f75a76110f0a75, type: 2}
+    resultAmount: 1
+    levelRequired: 19
+    ingredients:
+    - {fileID: 11400000, guid: 7a40f2b7efc9eff45955eaa72fcc8200, type: 2}
+    - {fileID: 11400000, guid: b3f2e9f12dbd01b4ea5f6b7e5cd250c2, type: 2}
+    - {fileID: 11400000, guid: 3cea9ddbed5f3a040a385aa187396721, type: 2}
+    amounts: 0d0000000500000009000000

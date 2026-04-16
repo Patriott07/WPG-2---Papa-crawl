@@ -16,9 +16,12 @@ public class ELarva : MonoBehaviour
     // COMPONENT HELPER
     // ==========================
     AIPath aIPath;
+    EnemyDropSystem itemDropScript;
     void Awake()
     {
         aIPath = gameObject.GetComponent<AIPath>();
+        itemDropScript = gameObject.GetComponent<EnemyDropSystem>();
+
         Init();
     }
     void Start()
@@ -73,18 +76,20 @@ public class ELarva : MonoBehaviour
         statEnemy.hp -= d;
 
         if (statEnemy.hp <= 0)
-            Dead();
+            StartCoroutine(Dead());
     }
 
-    void Dead()
+    IEnumerator Dead()
     {
-        if (!isAlive) return;
+        if (!isAlive) yield break;
 
         isAlive = false;
         SetMovePathF(false);
         gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         MapIdentity.Instance.DecreaseEnemyCount();
         MapIdentity.Instance.SpawnObjectExp(transform, (baseInit.hp + (level * 14)) / 4);
+        
+        if (itemDropScript != null) yield return StartCoroutine(itemDropScript.StartDrop()); // drop item
         Destroy(gameObject);
     }
 

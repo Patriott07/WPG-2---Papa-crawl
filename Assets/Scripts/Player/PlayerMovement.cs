@@ -37,13 +37,35 @@ public class PlayerMovement : MonoBehaviour
         movementPlayer.bonusSpeed = 1f;
     }
 
+    void RegenStamina()
+    {
+        // Cek apakah player SEDANG TIDAK menekan Shift
+    if (!Input.GetKey(KeyCode.LeftShift))
+    {
+        // Cek jika stamina belum penuh
+        if (PlayerStat.Instance.playerStatus.stamina < PlayerStat.Instance.playerStatus.maxStamina)
+        {
+            // Tambah stamina secara mulus per detik (misal: 10 unit per detik)
+            // Pakai Time.deltaTime biar gak tergantung Frame Rate
+            PlayerStat.Instance.playerStatus.stamina += 8f * Time.deltaTime;
+            
+            // Pastikan gak luber dari maxStamina
+            PlayerStat.Instance.playerStatus.stamina = Mathf.Min(PlayerStat.Instance.playerStatus.stamina, PlayerStat.Instance.playerStatus.maxStamina);
+            
+            // Update UI
+            HUDUI.Instance.UpdateFillStamina();
+        }
+    }
+    }
+
     void Start()
     {
         playerHit = gameObject.GetComponent<PlayerHit>();
         cameraFollowSc = FindAnyObjectByType<CameraFollowPlayer>();
+        // InvokeRepeating("RegenStamina", 0, 0.5f);
     }
 
-    public void SetCanMove(bool state) => movementPlayer.canMove = state; 
+    public void SetCanMove(bool state) => movementPlayer.canMove = state;
 
     void Movement()
     {
@@ -53,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.S)) velocity.y = -1;
         else velocity.y = 0;
 
-        if (Input.GetKey(KeyCode.A)) {velocity.x = -1; FLipAllSprite(false);}
-        else if (Input.GetKey(KeyCode.D)) {velocity.x = 1; FLipAllSprite(true);}
+        if (Input.GetKey(KeyCode.A)) { velocity.x = -1; FLipAllSprite(false); }
+        else if (Input.GetKey(KeyCode.D)) { velocity.x = 1; FLipAllSprite(true); }
         else velocity.x = 0;
 
         if (velocity.x == 0 && velocity.y == 0) GameEvents.OnPlayerMove?.Invoke(false);
@@ -86,7 +108,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Running()
     {
-        if (Input.GetKey(KeyCode.LeftShift)) movementPlayer.bonusSpeed = 1.5f;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (PlayerStat.Instance.playerStatus.stamina <= 0.3f)
+            {
+                movementPlayer.bonusSpeed = 1;
+                return;
+            }
+            movementPlayer.bonusSpeed = 1.5f;
+            PlayerStat.Instance.playerStatus.stamina -= 0.15f;
+            HUDUI.Instance.UpdateFillStamina();
+        }
         else movementPlayer.bonusSpeed = 1;
     }
 
@@ -98,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Running();
+        RegenStamina(); // Panggil di sini
         // cameraFollowSc.TransitionCamSize(rb, movementPlayer.bonusSpeed == 1.5f);
     }
 

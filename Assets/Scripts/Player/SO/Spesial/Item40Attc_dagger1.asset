@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 40
   itemName: Emerald Dagger
-  itemType: 3
+  Description: 
+  itemType: 4
   isStackable: 0
   maxStack: 1
-  icon: {fileID: 0}
+  icon: {fileID: -9213776401074073213, guid: ffc78819a1e2bf045a7854f7e2b36d8e, type: 3}

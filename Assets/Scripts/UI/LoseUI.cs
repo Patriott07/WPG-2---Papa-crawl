@@ -10,12 +10,12 @@ public class LoseUI : MonoBehaviour
     public CanvasGroup canvasGroupContent, canvasGroupText;
     List<string> tips_texts_content = new List<string>
     {
-        "Better prepare yourself before fight",  
-        "Every Map Have Different Enemy, Becarefull",  
-        "Choose Right Weapon Will Bring You Win.",  
-        "Sometime maps diffuculty its not fit on you.",  
-        "You can back to last map to collect item and gain exp.",  
-        "Focus on Enemy, move, and shoot.",  
+        "Better prepare yourself before fight",
+        "Every Map Have Different Enemy, Becarefull",
+        "Choose Right Weapon Will Bring You Win.",
+        "Sometime maps diffuculty its not fit on you.",
+        "You can back to last map to collect item and gain exp.",
+        "Focus on Enemy, move, and shoot.",
     };
 
     void Awake()
@@ -38,6 +38,8 @@ public class LoseUI : MonoBehaviour
             yield return new WaitForSeconds(1f);
             text_time.text = (i).ToString();
         }
+        yield return new WaitForSeconds(1f);
+        text_time.text = (0).ToString();
     }
 
     void OnEnable()

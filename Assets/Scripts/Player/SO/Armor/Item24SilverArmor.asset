@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9661546d7ee679d45b74bcf4c76ae8ee, type: 3}
-  m_Name: Item24IronArmor
+  m_Name: Item24SilverArmor
   m_EditorClassIdentifier: 
   id: 24
-  itemName: Iron Armor
+  itemName: Silver Armor
   Description: 
-  itemType: 2
+  itemType: 3
   isStackable: 0
   maxStack: 1
   icon: {fileID: 2956180805967829634, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}

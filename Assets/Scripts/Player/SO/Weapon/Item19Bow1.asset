@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 19
   itemName: 'Long Bow '
   Description: 
-  itemType: 0
+  itemType: 2
   isStackable: 0
   maxStack: 1
   icon: {fileID: 1507640900937886510, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}

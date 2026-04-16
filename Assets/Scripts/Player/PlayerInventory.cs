@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
 
     public int maxSlots = 30;
     public InventorySlot[] slots;
+    public InventorySlot[] slotsQuickHUD;
 
     public List<ItemData> listItemTestWanInsert;
 
@@ -20,6 +21,12 @@ public class PlayerInventory : MonoBehaviour
     {
         Instance = this;
         slots = new InventorySlot[maxSlots];
+        slotsQuickHUD = new InventorySlot[4];
+
+        for (int i = 0; i < 4; i++)
+        {
+            slotsQuickHUD[i] = new InventorySlot();
+        }
 
         for (int i = 0; i < maxSlots; i++)
         {
@@ -104,6 +111,73 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
+
+    // =========================
+    // ADD ITEM
+    // =========================
+    public bool AddItemQuickSlot(ItemData item, int amount)
+    {
+        if (item.isStackable)
+        {
+            // 1. Isi slot yang sudah ada
+            for (int i = 0; i < slotsQuickHUD.Length; i++)
+            {
+                if (slotsQuickHUD[i].item == item && slotsQuickHUD[i].quantity < item.maxStack)
+                {
+                    int space = item.maxStack - slotsQuickHUD[i].quantity;
+                    int toAdd = Mathf.Min(space, amount);
+
+                    slotsQuickHUD[i].quantity += toAdd;
+                    amount -= toAdd;
+
+                    if (amount <= 0)
+                        return true;
+                }
+            }
+
+            // 2. Isi slot kosong
+            for (int i = 0; i < slotsQuickHUD.Length; i++)
+            {
+                if (slotsQuickHUD[i].IsEmpty())
+                {
+                    int toAdd = Mathf.Min(item.maxStack, amount);
+
+                    slotsQuickHUD[i].item = item;
+                    slotsQuickHUD[i].quantity = toAdd;
+                    amount -= toAdd;
+
+                    if (amount <= 0)
+                        return true;
+                }
+            }
+        }
+        else
+        {
+            // item non-stack
+            for (int j = 0; j < amount; j++)
+            {
+                bool placed = false;
+
+                for (int i = 0; i < slotsQuickHUD.Length; i++)
+                {
+                    if (slotsQuickHUD[i].IsEmpty())
+                    {
+                        slotsQuickHUD[i].item = item;
+                        slotsQuickHUD[i].quantity = 1;
+                        placed = true;
+                        break;
+                    }
+                }
+
+                if (!placed)
+                    return false; // inventory penuh
+            }
+        }
+
+        return true;
+    }
+
+
     // =========================
     // REMOVE ITEM
     // =========================
@@ -126,6 +200,36 @@ public class PlayerInventory : MonoBehaviour
                 {
                     amount -= slots[i].quantity;
                     slots[i].Clear();
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    // =========================
+    // REMOVE ITEM
+    // =========================
+    public bool RemoveItemQuickSlot(ItemData item, int amount)
+    {
+        for (int i = 0; i < slotsQuickHUD.Length; i++)
+        {
+            if (slotsQuickHUD[i].item == item)
+            {
+                if (slotsQuickHUD[i].quantity >= amount)
+                {
+                    slotsQuickHUD[i].quantity -= amount;
+
+                    if (slotsQuickHUD[i].quantity <= 0)
+                        slotsQuickHUD[i].Clear();
+
+                    return true;
+                }
+                else
+                {
+                    amount -= slotsQuickHUD[i].quantity;
+                    slotsQuickHUD[i].Clear();
                 }
             }
         }
@@ -179,7 +283,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 el.Clear();
             }
-
         }
 
         // call saving data
@@ -215,6 +318,54 @@ public class PlayerInventory : MonoBehaviour
         else gameState.lastSaveScene = MapIdentity.Instance.lastSaveScene;
 
         return gameState;
+    }
+
+    public void UseItemAt(int index)
+    {
+        if (slotsQuickHUD[index].item == null) return;
+        var item = slotsQuickHUD[index];
+        int amount = 1;
+        // for (int i = 0; i < slotsQuickHUD.Length; i++)
+        // {
+        // if (slotsQuickHUD[i].item == item)
+        // {
+        if (slotsQuickHUD[index].quantity >= amount)
+        {
+            slotsQuickHUD[index].quantity -= amount;
+            RemoveItem(slotsQuickHUD[index].item, amount);
+
+            CheckUseItem(slotsQuickHUD[index].item);
+
+            if (slotsQuickHUD[index].quantity <= 0)
+                slotsQuickHUD[index].Clear();
+
+            HUDUI.Instance.UpdateQuickSlotHUD();
+        }
+        else
+        {
+            // amount -= slotsQuickHUD[index].quantity;
+            slotsQuickHUD[index].Clear();
+        }
+
+    }
+
+    void CheckUseItem(ItemData item)
+    {
+        if (item.itemType == ItemType.Consumable)
+        {
+            switch (item.id)
+            {
+                case 1:
+                    PlayerStat.Instance.GainHP(10);
+                    break;
+                case 2:
+                    PlayerStat.Instance.GainHP(20);
+                    break;
+                case 3:
+                    PlayerStat.Instance.GainHP(30);
+                    break;
+            }
+        }
     }
 
     void OnEnable()

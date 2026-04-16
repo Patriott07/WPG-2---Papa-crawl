@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 41
   itemName: Handle Dagger
-  itemType: 3
+  Description: 
+  itemType: 4
   isStackable: 0
   maxStack: 1
-  icon: {fileID: 0}
+  icon: {fileID: -2670190076833308868, guid: ffc78819a1e2bf045a7854f7e2b36d8e, type: 3}

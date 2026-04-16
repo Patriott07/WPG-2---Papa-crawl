@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9661546d7ee679d45b74bcf4c76ae8ee, type: 3}
-  m_Name: Item25ObsidianArmor
+  m_Name: Item23IronFiberArmor
   m_EditorClassIdentifier: 
-  id: 25
-  itemName: Obsidian Armor
+  id: 23
+  itemName: Iron Fiber Armor
   Description: 
-  itemType: 2
+  itemType: 3
   isStackable: 0
   maxStack: 1
-  icon: {fileID: -5114758474589342736, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}
+  icon: {fileID: 3236694897652414742, guid: b4517f2a3b85c8c43a67ddc0b7ed798a, type: 3}
